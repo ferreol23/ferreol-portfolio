@@ -1,0 +1,273 @@
+@import "tailwindcss";
+
+/*
+  DESIGN TOKENS
+  -------------
+  All colors live here. The site is dark by default; light mode is switched on
+  by setting data-theme="light" on the <html> element (the theme button does this).
+
+  To change the accent color for the WHOLE site, edit --accent below.
+  Everything else (glows, the darker light-mode version) is derived from it.
+*/
+:root {
+  --accent: #ff6b1a; /* <- THE accent color. Change it here, only here. */
+
+  /* Dark theme (default): warm near-black, like a dim studio */
+  --bg: #0e0d0c;
+  --surface: #171614;
+  --surface-2: #201e1b;
+  --line: #2e2b27;
+  --text: #f5f3f0;
+  --text-muted: #aaa49b;
+
+  /* Accent used for text, links and focus rings */
+  --accent-strong: var(--accent);
+  /* Text placed ON an accent-filled background (primary buttons, CTA banner) */
+  --on-accent: #0e0d0c;
+  /* Soft orange light used behind the portrait */
+  --glow: color-mix(in oklab, var(--accent) 55%, transparent);
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  /* Light theme: warm paper white */
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --surface-2: #efede8;
+  --line: #e3dfd8;
+  --text: #15130f;
+  --text-muted: #5c564f;
+
+  /* Darker version of the accent so orange text stays readable on white */
+  --accent-strong: color-mix(in oklab, var(--accent), black 32%);
+  --glow: color-mix(in oklab, var(--accent) 35%, transparent);
+
+  color-scheme: light;
+}
+
+/* Make the tokens available as Tailwind classes: bg-surface, text-muted, border-line, bg-accent... */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-on-accent: var(--on-accent);
+
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-atkinson);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-atkinson), system-ui, sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-bricolage), system-ui, sans-serif;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+/* Big condensed headlines (the bold poster look from the references) */
+.display {
+  font-family: var(--font-bricolage), system-ui, sans-serif;
+  font-weight: 800;
+  font-variation-settings: "wdth" 75, "opsz" 96;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+
+/* Visible keyboard focus everywhere (only shows for keyboard users, not mouse clicks) */
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Headline words sit in a small "window" so they can slide up into view */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+.word > span {
+  display: inline-block;
+}
+
+/* Thin orange bar at the very top showing how far down the page you are */
+.scroll-progress {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* FAQ chevron */
+.faq-item[open] .faq-chevron {
+  transform: rotate(45deg);
+}
+
+/*
+  MOTION
+  ------
+  Everything that moves lives inside this block, so visitors who turned on
+  "reduce motion" in their device settings get a calm, still page.
+  Easing: --ease-out = fast start, gentle stop (used for things appearing).
+*/
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes word-up {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* Uses translate/scale (not transform) so it combines with the hover lift below */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+    scale: 0.98;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-8%, 6%) scale(1.12);
+  }
+}
+
+@keyframes grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+    interpolate-size: allow-keywords;
+  }
+
+  /* Hero pieces rise in one after another when the page loads */
+  .rise {
+    animation: rise 0.7s var(--ease-out) both;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  /* Hero headline: words slide up one by one */
+  .word > span {
+    animation: word-up 0.8s var(--ease-out) both;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  /* Sections and cards fade up as they scroll into view (pure CSS, no JavaScript) */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      animation: grow linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+
+  /* Endless sideways strip of services; pauses when hovered */
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .spin-slow {
+    animation: spin 24s linear infinite;
+  }
+
+  .glow-drift {
+    animation: drift 9s ease-in-out infinite alternate;
+  }
+
+  /* Cards lift slightly on hover */
+  .lift {
+    transition:
+      transform 0.25s var(--ease-out),
+      border-color 0.25s ease;
+  }
+  .lift:hover {
+    transform: translateY(-6px);
+  }
+
+  .faq-chevron {
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  /* FAQ answers slide open smoothly (in browsers that support it) */
+  .faq-item::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition:
+      block-size 0.4s var(--ease-out),
+      content-visibility 0.4s allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    block-size: auto;
+  }
+}
+

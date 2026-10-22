@@ -1,0 +1,191 @@
+/**
+ * ALL visible text on the site, in English.
+ * To add French later: copy this file to fr.ts and translate the values
+ * (keep the keys on the left exactly the same).
+ *
+ * {name} is replaced automatically with your name from src/config/site.ts.
+ */
+export const en = {
+  nav: {
+    home: "Home",
+    work: "Work",
+    reviews: "Reviews",
+    contact: "Contact",
+    hireMe: "Hire me",
+    skipToContent: "Skip to content",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    mainLabel: "Main",
+    mobileLabel: "Mobile menu",
+  },
+  theme: {
+    toLight: "Switch to light theme",
+    toDark: "Switch to dark theme",
+  },
+  common: {
+    opensInNewTab: "(opens in a new tab)",
+    socialLabel: "Find me online",
+  },
+  hero: {
+    available: "Available for new projects",
+    intro: "Hi, I'm {name}, a freelance web & app developer.",
+    headline: "Websites and apps that help your business grow.",
+    subtitle:
+      "From your first business website to a full web or mobile app: I design it, build it and keep it running. You get a clear price, regular updates and support after launch.",
+    hireOnFiverr: "Hire me on Fiverr",
+    contactMe: "Contact me",
+    photoAlt: "Portrait of {name}",
+    photoPlaceholder: "[YOUR PHOTO]",
+    basedIn: "Based in",
+    basedInNote: "Working with clients locally and remotely.",
+    stackTitle: "Tools I work with",
+    featuredTitle: "Featured project",
+    // Text that circles around the rotating badge next to the photo.
+    badge: "Web & app developer • Freelance • Let's build • ",
+    viewProject: "View project",
+  },
+  marquee: [
+    "Business websites",
+    "Web applications",
+    "Mobile apps",
+    "Bug fixing",
+    "Redesigns",
+    "Mobile-first design",
+    "Support after launch",
+  ],
+  about: {
+    heading: "About me",
+    lead: "I'm {name}. I turn ideas into websites and apps that are simple to use and easy to grow.",
+    body: "[YOUR STORY] Two or three sentences about you: how you started, what you enjoy building, and the kind of clients you like to help.",
+    facts: {
+      basedIn: "Based in",
+      languages: "Languages",
+      responseTime: "Usual reply time",
+    },
+  },
+  benefits: {
+    heading: "What you get when you work with me",
+    intro: "Beyond the code: the way the project is run matters just as much.",
+    items: [
+      {
+        title: "Clear communication",
+        body: "Plain-language updates, no jargon. You always know where your project stands and what comes next.",
+      },
+      {
+        title: "Mobile-first design",
+        body: "Every page is designed for phones first, then tablets and computers, so it looks right wherever your clients are.",
+      },
+      {
+        title: "Fast and easy to find",
+        body: "Clean code, optimized images and proper page titles help visitors, and search engines, find you quickly.",
+      },
+      {
+        title: "Secure by default",
+        body: "Forms are checked, spam is filtered and secret keys are never exposed. Safety is built in from the start.",
+      },
+    ],
+  },
+  faq: {
+    heading: "Questions clients often ask",
+    intro: "Can't find your answer? Send me a message.",
+    contactLink: "Ask a question",
+    items: [
+      {
+        question: "How much does a project cost?",
+        answer:
+          "It depends on what you need. After a short brief, I send you a clear written price before any work starts. You can also see my packages on Fiverr.",
+      },
+      {
+        question: "How long does it take?",
+        answer:
+          "[YOUR TIMEFRAME] A simple business website usually takes [X] to [Y] weeks. Web and mobile apps take longer. You get a timeline together with the proposal.",
+      },
+      {
+        question: "Can you fix or improve my existing website?",
+        answer:
+          "Yes. Send me the link and a short description of the problem, and I'll tell you what I can do and what it would cost.",
+      },
+      {
+        question: "Do I need my text and images ready?",
+        answer: "It helps, but it's not required. We can start with placeholders and fill them in together as the project moves forward.",
+      },
+      {
+        question: "What happens after delivery?",
+        answer:
+          "I show you how everything works and stay available for fixes and questions. Ongoing support can be added if you need it.",
+      },
+      {
+        question: "How do I pay?",
+        answer: "You can order and pay securely through Fiverr. For other options, send me a message.",
+      },
+    ],
+  },
+  services: {
+    heading: "What I can build for you",
+    intro: "Pick what you need. Not sure? Describe your problem and I'll suggest the right option.",
+    items: [
+      {
+        title: "Business websites",
+        body: "A fast, professional site that shows what you do and makes it easy for customers to contact you.",
+      },
+      {
+        title: "Web applications",
+        body: "Custom tools that run in the browser: booking systems, dashboards, client portals and more.",
+      },
+      {
+        title: "Mobile apps",
+        body: "Apps for iPhone and Android that put your service in your customers' pocket.",
+      },
+      {
+        title: "Bug fixing & improvements",
+        body: "Something broken or slow? I find the cause, fix it, and explain what changed.",
+      },
+    ],
+  },
+  process: {
+    heading: "How I work",
+    intro: "Four clear steps, so you always know what happens next.",
+    steps: [
+      {
+        title: "Brief",
+        body: "You tell me about your project, your goals and your deadline. I ask questions until the scope is clear.",
+      },
+      {
+        title: "Proposal & price",
+        body: "You get a written plan with a clear price and timeline before any work starts.",
+      },
+      {
+        title: "Build with updates",
+        body: "I build in stages and share progress regularly, so you can give feedback along the way.",
+      },
+      {
+        title: "Delivery & support",
+        body: "I launch your project, show you how to use it, and stay available for fixes and questions.",
+      },
+    ],
+  },
+  portfolio: {
+    heading: "Selected work",
+    intro: "A few projects I've built.",
+    viewProject: "View project",
+    screenshotPlaceholder: "[PROJECT SCREENSHOT]",
+  },
+  cta: {
+    heading: "Ready to start your project?",
+    body: "Order through Fiverr for secure payment and a clear delivery date. Prefer to talk first? Send me a message.",
+    hireOnFiverr: "Hire me on Fiverr",
+    sendMessage: "Send me a message",
+  },
+  footer: {
+    emailLabel: "Email",
+    rights: "All rights reserved.",
+    navLabel: "Footer",
+  },
+};
+
+export type Dictionary = typeof en;
+
+/** Replaces {name}-style tokens in a text with real values. */
+export function fill(text: string, values: Record<string, string>): string {
+  return text.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
+}
