@@ -212,12 +212,6 @@ h3 {
   }
 }
 
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -261,14 +255,6 @@ h3 {
       animation: grow linear both;
       animation-timeline: scroll(root);
     }
-  }
-
-  /* Endless sideways strip of services; pauses when hovered */
-  .marquee-track {
-    animation: marquee 40s linear infinite;
-  }
-  .marquee:hover .marquee-track {
-    animation-play-state: paused;
   }
 
   .spin-slow {
