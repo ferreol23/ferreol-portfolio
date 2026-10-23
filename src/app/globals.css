@@ -64,6 +64,11 @@
   --font-sans: var(--font-atkinson);
 }
 
+/* Keeps keyboard-focused elements from hiding under the sticky header */
+html {
+  scroll-padding-top: 6rem;
+}
+
 /* The shared page width + side margins used by every section */
 @utility shell {
   margin-inline: auto;

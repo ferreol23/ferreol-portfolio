@@ -30,16 +30,14 @@ export function Services() {
                 href="/contact"
                 className="sweep group block transition-colors duration-300 hover:text-on-accent focus-visible:text-on-accent focus-visible:outline-on-accent focus-visible:-outline-offset-4"
               >
+                <span className="sr-only">{en.services.ask} </span>
                 <div className="shell grid items-center gap-x-6 gap-y-3 py-8 sm:py-10 md:grid-cols-12">
                   <Icon
                     className="size-8 text-accent-strong transition-colors duration-300 group-hover:text-on-accent group-focus-visible:text-on-accent md:col-span-1"
                     strokeWidth={1.5}
                     aria-hidden="true"
                   />
-                  <h3 className="display text-[clamp(2rem,4.4vw,3.5rem)] md:col-span-5">
-                    <span className="sr-only">{en.services.ask} </span>
-                    {service.title}
-                  </h3>
+                  <h3 className="display text-[clamp(2rem,4.4vw,3.5rem)] md:col-span-5">{service.title}</h3>
                   <p className="max-w-md text-muted transition-colors duration-300 group-hover:text-on-accent group-focus-visible:text-on-accent md:col-span-5">
                     {service.body}
                   </p>

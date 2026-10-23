@@ -25,10 +25,10 @@ export function SiteFooter() {
         </div>
 
         <nav aria-label={en.footer.navLabel} className="md:col-span-3">
-          <ul className="grid grid-cols-2 gap-x-6 gap-y-3 md:grid-cols-1">
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-1 md:grid-cols-1">
             {footerLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="text-muted transition-colors hover:text-text">
+                <Link href={link.href} className="inline-block py-1.5 text-muted transition-colors hover:text-text">
                   {link.label}
                 </Link>
               </li>
