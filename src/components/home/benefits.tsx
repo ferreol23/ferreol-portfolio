@@ -11,7 +11,7 @@ export function Benefits() {
       <div className="shell grid gap-12 py-24 sm:py-32 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
-            <h2 id="benefits-heading" data-reveal className="display text-[clamp(2.5rem,5vw,4.25rem)]">
+            <h2 id="benefits-heading" data-split className="display text-[clamp(2.5rem,5vw,4.25rem)]">
               {en.benefits.heading}
             </h2>
             <p data-reveal className="mt-5 text-lg text-muted">

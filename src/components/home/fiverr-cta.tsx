@@ -11,7 +11,7 @@ export function FiverrCta() {
     // Focus rings are dark here, since the usual orange ring would vanish on orange.
     <section aria-labelledby="cta-heading" className="bg-accent text-on-accent [&_:focus-visible]:outline-on-accent">
       <div className="shell py-24 sm:py-32">
-        <h2 id="cta-heading" data-reveal className="display max-w-5xl text-[clamp(3.5rem,11vw,10rem)] leading-[0.85]">
+        <h2 id="cta-heading" data-split className="display max-w-5xl text-[clamp(3.5rem,11vw,10rem)] leading-[0.85]">
           {en.cta.heading}
         </h2>
         <div data-reveal className="mt-12 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">

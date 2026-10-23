@@ -2,7 +2,7 @@
   ANIMATION BASE — the single setup file for the whole site.
   ----------------------------------------------------------
   Responsibilities (and nothing else — NO effects live here):
-    1. Register the GSAP plugins used across the app (ScrollTrigger, useGSAP).
+    1. Register the GSAP plugins used across the app (ScrollTrigger, SplitText, useGSAP).
     2. Start Lenis smooth scrolling and sync it with ScrollTrigger.
     3. Respect prefers-reduced-motion: if "reduce", Lenis never starts and the
        native scroll is used instead.
@@ -16,12 +16,13 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import Lenis from "lenis";
 import { DURATION, EASE, LENIS_OPTIONS } from "@/config/motion";
 
 // Register once. useGSAP is itself a GSAP plugin and must be registered too.
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 // Project-wide tween defaults (power3.out, ~micro duration) — see CLAUDE.md.
 gsap.defaults({ ease: EASE.out, duration: DURATION.micro });

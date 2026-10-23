@@ -12,7 +12,7 @@ export function About() {
   return (
     <section id="about" aria-labelledby="about-heading" className="shell scroll-mt-24 py-24 sm:py-32">
       <div className="grid gap-12 lg:grid-cols-12">
-        <h2 id="about-heading" data-reveal className="display text-[clamp(2.75rem,6.5vw,5.5rem)] lg:col-span-4">
+        <h2 id="about-heading" data-split className="display text-[clamp(2.75rem,6.5vw,5.5rem)] lg:col-span-4">
           {en.about.heading}
         </h2>
 

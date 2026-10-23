@@ -13,7 +13,7 @@ export function Services() {
   return (
     <section id="services" aria-labelledby="services-heading" className="scroll-mt-24 py-24 sm:py-32">
       <div className="shell grid gap-6 lg:grid-cols-12 lg:items-end">
-        <h2 id="services-heading" data-reveal className="display text-[clamp(2.75rem,6.5vw,5.5rem)] lg:col-span-7">
+        <h2 id="services-heading" data-split className="display text-[clamp(2.75rem,6.5vw,5.5rem)] lg:col-span-7">
           {en.services.heading}
         </h2>
         <p data-reveal className="max-w-md text-lg text-muted lg:col-span-5 lg:justify-self-end">

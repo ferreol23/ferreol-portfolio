@@ -15,7 +15,7 @@ export function Process() {
     <section id="process" aria-labelledby="process-heading" className="scroll-mt-24 border-y border-line bg-surface">
       <div className="shell py-24 sm:py-32">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
-          <h2 id="process-heading" data-reveal className="display text-[clamp(2.75rem,6.5vw,5.5rem)] lg:col-span-7">
+          <h2 id="process-heading" data-split className="display text-[clamp(2.75rem,6.5vw,5.5rem)] lg:col-span-7">
             {en.process.heading}
           </h2>
           <p data-reveal className="max-w-md text-lg text-muted lg:col-span-5 lg:justify-self-end">
