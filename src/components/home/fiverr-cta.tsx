@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
+import { Magnetic } from "@/components/magnetic";
 import { FIVERR_URL } from "@/config/links";
 import { en } from "@/content/en";
 
@@ -16,10 +17,12 @@ export function FiverrCta() {
         <div data-reveal className="mt-12 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <p className="max-w-md text-lg font-medium">{en.cta.body}</p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-            <ButtonLink href={FIVERR_URL} variant="dark">
-              {en.cta.hireOnFiverr}
-              <ArrowUpRight className="size-5" aria-hidden="true" />
-            </ButtonLink>
+            <Magnetic>
+              <ButtonLink href={FIVERR_URL} variant="dark">
+                {en.cta.hireOnFiverr}
+                <ArrowUpRight className="size-5" aria-hidden="true" />
+              </ButtonLink>
+            </Magnetic>
             <Link href="/contact" className="inline-flex min-h-11 items-center font-semibold underline decoration-2 underline-offset-4">
               {en.cta.sendMessage}
             </Link>

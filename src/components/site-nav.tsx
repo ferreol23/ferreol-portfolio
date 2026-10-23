@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { FIVERR_URL } from "@/config/links";
 import { en } from "@/content/en";
+import { Magnetic } from "./magnetic";
 import { ThemeToggle } from "./theme-toggle";
 
 const links = [
@@ -44,16 +45,18 @@ export function SiteNav() {
       </nav>
 
       <div className="flex items-center gap-2">
-        <a
-          href={FIVERR_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden min-h-11 items-center gap-1.5 rounded-full bg-accent px-5 font-semibold text-on-accent transition-colors duration-200 hover:bg-[color-mix(in_oklab,var(--accent),white_12%)] sm:inline-flex"
-        >
-          {en.nav.hireMe}
-          <ArrowUpRight className="size-4" aria-hidden="true" />
-          <span className="sr-only"> {en.common.opensInNewTab}</span>
-        </a>
+        <Magnetic className="hidden sm:inline-block">
+          <a
+            href={FIVERR_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-accent px-5 font-semibold text-on-accent transition-colors duration-200 hover:bg-[color-mix(in_oklab,var(--accent),white_12%)]"
+          >
+            {en.nav.hireMe}
+            <ArrowUpRight className="size-4" aria-hidden="true" />
+            <span className="sr-only"> {en.common.opensInNewTab}</span>
+          </a>
+        </Magnetic>
         <ThemeToggle />
         <button
           type="button"

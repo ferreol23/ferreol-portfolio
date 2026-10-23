@@ -2,6 +2,7 @@ import { ArrowUpRight, Asterisk, UserRound } from "lucide-react";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { ButtonLink } from "@/components/button-link";
+import { Magnetic } from "@/components/magnetic";
 import { SocialLinks } from "@/components/social-links";
 import { FIVERR_URL } from "@/config/links";
 import { siteConfig } from "@/config/site";
@@ -46,13 +47,17 @@ export function Hero() {
           </div>
 
           <div className="rise mt-9 flex flex-wrap gap-3" style={delay(600)}>
-            <ButtonLink href={FIVERR_URL}>
-              {en.hero.hireOnFiverr}
-              <ArrowUpRight className="size-5" aria-hidden="true" />
-            </ButtonLink>
-            <ButtonLink href="/contact" variant="secondary">
-              {en.hero.contactMe}
-            </ButtonLink>
+            <Magnetic>
+              <ButtonLink href={FIVERR_URL}>
+                {en.hero.hireOnFiverr}
+                <ArrowUpRight className="size-5" aria-hidden="true" />
+              </ButtonLink>
+            </Magnetic>
+            <Magnetic>
+              <ButtonLink href="/contact" variant="secondary">
+                {en.hero.contactMe}
+              </ButtonLink>
+            </Magnetic>
           </div>
 
           <div className="rise mt-10 flex flex-wrap items-center gap-x-8 gap-y-4" style={delay(680)}>
