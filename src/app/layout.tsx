@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Atkinson_Hyperlegible_Next, Bricolage_Grotesque } from "next/font/google";
 import Script from "next/script";
+import { MotionProvider } from "@/components/motion-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { siteConfig } from "@/config/site";
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col">
         <Script src="/theme-init.js" strategy="beforeInteractive" />
+        <MotionProvider />
         <a
           href="#content"
           className="sr-only z-50 rounded-full bg-accent font-semibold text-on-accent focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:px-5 focus:py-3"

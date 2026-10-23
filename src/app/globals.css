@@ -131,6 +131,19 @@ h3 {
 */
 :root {
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /*
+    Shared timing/easing tokens — mirror of src/config/motion.ts.
+    Change a value here, change it there too.
+  */
+  --dur-micro-fast: 0.2s;
+  --dur-micro: 0.3s; /* micro-interactions: 0.2–0.4s */
+  --dur-micro-slow: 0.4s;
+  --dur-enter-fast: 0.6s;
+  --dur-enter: 0.8s; /* appearances: 0.6–1s */
+  --dur-enter-slow: 1s;
+
+  --ease-power3: cubic-bezier(0.215, 0.61, 0.355, 1); /* ≈ power3.out (default) */
 }
 
 @keyframes rise {
@@ -268,6 +281,28 @@ h3 {
   }
   .faq-item[open]::details-content {
     block-size: auto;
+  }
+}
+
+/*
+  REDUCED-MOTION SAFETY NET
+  -------------------------
+  Last line of defence for visitors who asked their OS to reduce motion:
+  flatten every animation and transition (CSS or JS-driven) and turn off smooth
+  scrolling. Lenis is also never started in this mode (see animations/setup.ts).
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
   }
 }
 
