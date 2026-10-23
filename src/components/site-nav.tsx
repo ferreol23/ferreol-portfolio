@@ -11,6 +11,8 @@ import { ThemeToggle } from "./theme-toggle";
 const links = [
   { href: "/", label: en.nav.home },
   { href: "/#work", label: en.nav.work },
+  { href: "/#services", label: en.nav.services },
+  { href: "/#process", label: en.nav.process },
   { href: "/reviews", label: en.nav.reviews },
   { href: "/contact", label: en.nav.contact },
 ];
@@ -29,7 +31,7 @@ export function SiteNav() {
 
   return (
     <>
-      <nav aria-label={en.nav.mainLabel} className="hidden md:block">
+      <nav aria-label={en.nav.mainLabel} className="hidden lg:block">
         <ul className="flex items-center gap-8">
           {links.map((link) => (
             <li key={link.href}>
@@ -59,7 +61,7 @@ export function SiteNav() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? en.nav.closeMenu : en.nav.openMenu}
-          className="grid size-11 place-items-center rounded-full border border-line md:hidden"
+          className="grid size-11 place-items-center rounded-full border border-line lg:hidden"
         >
           {open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
         </button>
@@ -69,7 +71,7 @@ export function SiteNav() {
         <nav
           id="mobile-menu"
           aria-label={en.nav.mobileLabel}
-          className="absolute inset-x-0 top-full border-b border-line bg-bg px-4 pb-6 pt-2 md:hidden"
+          className="absolute inset-x-0 top-full border-b border-line bg-bg px-4 pb-6 pt-2 lg:hidden"
           onKeyDown={(event) => {
             if (event.key === "Escape") setOpen(false);
           }}

@@ -8,7 +8,8 @@ import { Portfolio } from "@/components/home/portfolio";
 import { Process } from "@/components/home/process";
 import { Services } from "@/components/home/services";
 
-// Home page: the sections in order, top to bottom. Reorder or remove lines to change the page.
+// Home page, told as a story: who → what → about → how → proof → why → questions → action.
+// Reorder or remove lines to change the page.
 export default function Home() {
   return (
     <>
@@ -16,9 +17,9 @@ export default function Home() {
       <Marquee />
       <Services />
       <About />
-      <Benefits />
       <Process />
       <Portfolio />
+      <Benefits />
       <Faq />
       <FiverrCta />
     </>

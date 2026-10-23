@@ -9,6 +9,8 @@ export const en = {
   nav: {
     home: "Home",
     work: "Work",
+    services: "Services",
+    process: "Process",
     reviews: "Reviews",
     contact: "Contact",
     hireMe: "Hire me",
@@ -36,13 +38,8 @@ export const en = {
     contactMe: "Contact me",
     photoAlt: "Portrait of {name}",
     photoPlaceholder: "[YOUR PHOTO]",
-    basedIn: "Based in",
-    basedInNote: "Working with clients locally and remotely.",
-    stackTitle: "Tools I work with",
-    featuredTitle: "Featured project",
     // Text that circles around the rotating badge next to the photo.
     badge: "Web & app developer • Freelance • Let's build • ",
-    viewProject: "View project",
   },
   marquee: [
     "Business websites",
@@ -57,6 +54,7 @@ export const en = {
     heading: "About me",
     lead: "I'm {name}. I turn ideas into websites and apps that are simple to use and easy to grow.",
     body: "[YOUR STORY] Two or three sentences about you: how you started, what you enjoy building, and the kind of clients you like to help.",
+    stackTitle: "Tools I work with",
     facts: {
       basedIn: "Based in",
       languages: "Languages",
@@ -123,6 +121,8 @@ export const en = {
   services: {
     heading: "What I can build for you",
     intro: "Pick what you need. Not sure? Describe your problem and I'll suggest the right option.",
+    // Read by screen readers on each service row, e.g. "Ask about Business websites".
+    ask: "Ask about",
     items: [
       {
         title: "Business websites",
@@ -145,6 +145,7 @@ export const en = {
   process: {
     heading: "How I work",
     intro: "Four clear steps, so you always know what happens next.",
+    stepLabel: "Step",
     steps: [
       {
         title: "Brief",
@@ -171,7 +172,7 @@ export const en = {
     screenshotPlaceholder: "[PROJECT SCREENSHOT]",
   },
   cta: {
-    heading: "Ready to start your project?",
+    heading: "Let's build your project.",
     body: "Order through Fiverr for secure payment and a clear delivery date. Prefer to talk first? Send me a message.",
     hireOnFiverr: "Hire me on Fiverr",
     sendMessage: "Send me a message",
@@ -180,6 +181,7 @@ export const en = {
     emailLabel: "Email",
     rights: "All rights reserved.",
     navLabel: "Footer",
+    backToTop: "Back to top",
   },
 };
 

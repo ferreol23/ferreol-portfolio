@@ -1,19 +1,20 @@
-import { ArrowUpRight, Asterisk, ImageIcon, MapPin, UserRound } from "lucide-react";
+import { ArrowUpRight, Asterisk, UserRound } from "lucide-react";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { ButtonLink } from "@/components/button-link";
 import { SocialLinks } from "@/components/social-links";
 import { FIVERR_URL } from "@/config/links";
-import { projects } from "@/config/projects";
 import { siteConfig } from "@/config/site";
 import { en, fill } from "@/content/en";
 
-/** Stagger helper for the page-load animation. */
+/** Stagger helper for the page-load animation (pure CSS, so it works before JavaScript loads). */
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as CSSProperties;
 
+/**
+ * First screen: one focal point. Big headline on the left, portrait on the right.
+ */
 export function Hero() {
   const name = siteConfig.name;
-  const featured = projects[0];
   // The headline's final period is drawn in the accent color.
   const headline = en.hero.headline.replace(/\.$/, "");
   const endsWithPeriod = headline !== en.hero.headline;
@@ -21,29 +22,15 @@ export function Hero() {
   const words = headline.split(" ");
 
   return (
-    <section aria-labelledby="hero-heading" className="mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 sm:pt-12">
-      <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
+    <section aria-labelledby="hero-heading" className="relative">
+      <div className="shell grid items-center gap-12 pb-20 pt-10 sm:pt-14 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-12 lg:gap-10 lg:py-12">
         {/* Text side */}
         <div className="lg:col-span-7">
-          {siteConfig.available && (
-            <p
-              className="rise inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 text-sm text-muted"
-              style={delay(0)}
-            >
-              <span className="size-2 rounded-full bg-accent" aria-hidden="true" />
-              {en.hero.available}
-            </p>
-          )}
-
-          <p className="rise mt-6 text-lg text-muted" style={delay(80)}>
-            {fill(en.hero.intro, { name })}
-          </p>
-
-          <h1 id="hero-heading" className="display mt-3 text-[clamp(2.75rem,7.5vw,5.5rem)] uppercase">
+          <h1 id="hero-heading" className="display text-[clamp(3.1rem,8.6vw,7.25rem)]">
             {words.map((word, index) => (
               <span key={`${word}-${index}`}>
                 <span className="word">
-                  <span style={delay(160 + index * 60)}>
+                  <span style={delay(80 + index * 60)}>
                     {word}
                     {endsWithPeriod && index === words.length - 1 && <span className="text-accent-strong">.</span>}
                   </span>
@@ -53,11 +40,12 @@ export function Hero() {
             ))}
           </h1>
 
-          <p className="rise mt-6 max-w-xl text-lg text-muted" style={delay(500)}>
-            {en.hero.subtitle}
-          </p>
+          <div className="rise mt-8 max-w-xl" style={delay(520)}>
+            <p className="text-xl font-semibold text-text">{fill(en.hero.intro, { name })}</p>
+            <p className="mt-3 text-lg text-muted">{en.hero.subtitle}</p>
+          </div>
 
-          <div className="rise mt-8 flex flex-wrap gap-3" style={delay(580)}>
+          <div className="rise mt-9 flex flex-wrap gap-3" style={delay(600)}>
             <ButtonLink href={FIVERR_URL}>
               {en.hero.hireOnFiverr}
               <ArrowUpRight className="size-5" aria-hidden="true" />
@@ -67,44 +55,73 @@ export function Hero() {
             </ButtonLink>
           </div>
 
-          <SocialLinks className="rise mt-8 [--delay:660ms]" />
+          <div className="rise mt-10 flex flex-wrap items-center gap-x-8 gap-y-4" style={delay(680)}>
+            <SocialLinks />
+            {siteConfig.available && (
+              <p className="flex items-center gap-2.5 text-sm text-muted">
+                <span className="relative flex size-2.5" aria-hidden="true">
+                  <span className="absolute inset-0 rounded-full bg-accent opacity-60 motion-safe:animate-ping" />
+                  <span className="relative size-2.5 rounded-full bg-accent" />
+                </span>
+                {en.hero.available}
+              </p>
+            )}
+          </div>
         </div>
 
-        {/* Portrait side: photo with an orange rim light */}
-        <div className="rise relative mx-auto w-full max-w-md lg:col-span-5" style={delay(200)}>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-surface">
-            {/* Orange light that slowly drifts behind the photo */}
-            <div
-              aria-hidden="true"
-              className="glow-drift absolute -inset-[20%]"
-              style={{
-                background:
-                  "radial-gradient(120% 80% at 100% 20%, var(--glow), transparent 60%), radial-gradient(80% 60% at 0% 100%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 70%)",
-              }}
-            />
+        {/* Portrait: black-and-white photo lit by a warm orange rim light */}
+        <div className="rise relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none" style={delay(240)}>
+          <figure className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-surface">
             {siteConfig.photo ? (
               <Image
                 src={siteConfig.photo}
                 alt={fill(en.hero.photoAlt, { name })}
                 fill
                 priority
-                sizes="(min-width: 1024px) 28rem, 90vw"
-                className="object-cover mix-blend-luminosity"
+                sizes="(min-width: 1024px) 34rem, 90vw"
+                className="object-cover object-top grayscale contrast-125 brightness-[0.8]"
               />
             ) : (
-              <div className="relative grid h-full place-items-center text-muted">
+              <div className="grid h-full place-items-center text-muted">
                 <div className="flex flex-col items-center gap-3">
                   <UserRound className="size-24 opacity-60" strokeWidth={1} aria-hidden="true" />
                   <span className="text-sm">{en.hero.photoPlaceholder}</span>
                 </div>
               </div>
             )}
-          </div>
+
+            {/* Orange light from the right, drifting slowly */}
+            <div
+              aria-hidden="true"
+              className="glow-drift pointer-events-none absolute -inset-[20%] mix-blend-soft-light"
+              style={{
+                background: "radial-gradient(55% 45% at 85% 30%, var(--accent), transparent 70%)",
+              }}
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 mix-blend-color"
+              style={{ background: "linear-gradient(250deg, color-mix(in oklab, var(--accent) 55%, transparent), transparent 55%)" }}
+            />
+            {/* Fades the bottom of the photo into the page */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-bg/90 to-transparent"
+            />
+
+            <figcaption className="absolute bottom-6 left-6 right-6">
+              <span className="font-display text-2xl font-bold">{name}</span>
+              <span className="text-accent-strong" aria-hidden="true">
+                .
+              </span>
+              <span className="block text-sm text-muted">{siteConfig.location}</span>
+            </figcaption>
+          </figure>
 
           {/* Rotating round badge on the photo's corner (decoration only) */}
           <div
             aria-hidden="true"
-            className="absolute -bottom-8 -left-1 grid size-28 sm:-left-10 sm:size-32 place-items-center rounded-full border border-line bg-bg text-text sm:-left-10"
+            className="absolute -right-1 -top-8 grid size-28 place-items-center rounded-full border border-line bg-bg text-text sm:-right-8 sm:size-32"
           >
             <svg viewBox="0 0 100 100" className="spin-slow absolute inset-0 size-full">
               <defs>
@@ -121,72 +138,6 @@ export function Hero() {
             </span>
           </div>
         </div>
-      </div>
-
-      {/* Info cards */}
-      <div className="mt-14 grid gap-4 md:grid-cols-3">
-        <div className="reveal lift rounded-3xl border border-line bg-surface p-6 hover:border-accent-strong">
-          <h2 className="flex items-center gap-2 text-lg font-bold">
-            <MapPin className="size-5 text-accent-strong" aria-hidden="true" />
-            {en.hero.basedIn}
-          </h2>
-          <div
-            aria-hidden="true"
-            className="relative mt-4 h-20 overflow-hidden rounded-2xl border border-line bg-surface-2"
-            style={{
-              backgroundImage: "radial-gradient(var(--line) 1.2px, transparent 1.2px)",
-              backgroundSize: "12px 12px",
-            }}
-          >
-            <span className="absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_0_8px_var(--glow)]" />
-          </div>
-          <p className="mt-4 font-semibold">{siteConfig.location}</p>
-          <p className="text-sm text-muted">{en.hero.basedInNote}</p>
-        </div>
-
-        <div className="reveal lift rounded-3xl border border-line bg-surface p-6 hover:border-accent-strong">
-          <h2 className="text-lg font-bold">{en.hero.stackTitle}</h2>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {siteConfig.stack.map((tool, index) => (
-              <li key={`${tool}-${index}`} className="rounded-full border border-line bg-surface-2 px-3 py-1 text-sm">
-                {tool}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {featured && (
-          <div className="reveal lift rounded-3xl border border-line bg-surface p-6 hover:border-accent-strong">
-            <h2 className="text-lg font-bold">{en.hero.featuredTitle}</h2>
-            <div className="mt-4 flex gap-4">
-              <div className="relative aspect-[4/3] w-28 shrink-0 overflow-hidden rounded-xl border border-line bg-surface-2">
-                {featured.image ? (
-                  <Image src={featured.image} alt="" fill sizes="7rem" className="object-cover" />
-                ) : (
-                  <ImageIcon className="absolute inset-0 m-auto size-6 text-muted" aria-hidden="true" />
-                )}
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold">{featured.title}</p>
-                <p className="mt-1 line-clamp-2 text-sm text-muted">{featured.description}</p>
-              </div>
-            </div>
-            {featured.link && (
-              <a
-                href={featured.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-1 font-semibold text-accent-strong hover:underline"
-              >
-                {en.hero.viewProject}
-                <ArrowUpRight className="size-4" aria-hidden="true" />
-                <span className="sr-only">
-                  : {featured.title} {en.common.opensInNewTab}
-                </span>
-              </a>
-            )}
-          </div>
-        )}
       </div>
     </section>
   );

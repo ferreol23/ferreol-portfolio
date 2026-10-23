@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Recommended CSS for Lenis smooth scrolling (see animations/setup.ts). */
+@import "lenis/dist/lenis.css";
 
 /*
   DESIGN TOKENS
@@ -12,18 +14,18 @@
 :root {
   --accent: #ff6b1a; /* <- THE accent color. Change it here, only here. */
 
-  /* Dark theme (default): warm near-black, like a dim studio */
-  --bg: #0e0d0c;
-  --surface: #171614;
-  --surface-2: #201e1b;
-  --line: #2e2b27;
+  /* Dark theme (default): warm black, like a dim studio */
+  --bg: #0b0b0c;
+  --surface: #141413;
+  --surface-2: #1c1b1a;
+  --line: #2a2826;
   --text: #f5f3f0;
-  --text-muted: #aaa49b;
+  --text-muted: #a39e97;
 
   /* Accent used for text, links and focus rings */
   --accent-strong: var(--accent);
-  /* Text placed ON an accent-filled background (primary buttons, CTA banner) */
-  --on-accent: #0e0d0c;
+  /* Text placed ON an accent-filled background (primary buttons, CTA band) */
+  --on-accent: #0b0b0c;
   /* Soft orange light used behind the portrait */
   --glow: color-mix(in oklab, var(--accent) 55%, transparent);
 
@@ -34,10 +36,10 @@
   /* Light theme: warm paper white */
   --bg: #f6f5f2;
   --surface: #ffffff;
-  --surface-2: #efede8;
-  --line: #e3dfd8;
-  --text: #15130f;
-  --text-muted: #5c564f;
+  --surface-2: #eeece7;
+  --line: #e0dcd5;
+  --text: #121110;
+  --text-muted: #5a554f;
 
   /* Darker version of the accent so orange text stays readable on white */
   --accent-strong: color-mix(in oklab, var(--accent), black 32%);
@@ -62,12 +64,25 @@
   --font-sans: var(--font-atkinson);
 }
 
+/* The shared page width + side margins used by every section */
+@utility shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 82rem;
+  padding-inline: 1.25rem;
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+}
+
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-atkinson), system-ui, sans-serif;
   line-height: 1.6;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 h1,
@@ -84,7 +99,14 @@ h3 {
   font-weight: 800;
   font-variation-settings: "wdth" 75, "opsz" 96;
   letter-spacing: -0.01em;
-  line-height: 0.95;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+/* Outlined text (used for big step numbers) */
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent-strong);
 }
 
 /* Visible keyboard focus everywhere (only shows for keyboard users, not mouse clicks) */
@@ -111,23 +133,38 @@ h3 {
   display: inline-block;
 }
 
-/* Thin orange bar at the very top showing how far down the page you are */
+/* Thin orange bar under the header showing how far down the page you are */
 .scroll-progress {
   transform: scaleX(0);
   transform-origin: left;
 }
 
-/* FAQ chevron */
+/* FAQ "+" turns into "×" when open */
 .faq-item[open] .faq-chevron {
   transform: rotate(45deg);
+}
+
+/* Services list: an orange band sweeps in from the left on hover */
+.sweep {
+  position: relative;
+  isolation: isolate;
+}
+.sweep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
 }
 
 /*
   MOTION
   ------
-  Everything that moves lives inside this block, so visitors who turned on
-  "reduce motion" in their device settings get a calm, still page.
-  Easing: --ease-out = fast start, gentle stop (used for things appearing).
+  CSS motion lives inside the "no-preference" block, so visitors who turned on
+  "reduce motion" get a calm, still page. Scroll-linked motion (reveals, the
+  "How I work" story, image parallax) is done with GSAP in the components.
 */
 :root {
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -166,20 +203,6 @@ h3 {
   }
 }
 
-/* Uses translate/scale (not transform) so it combines with the hover lift below */
-@keyframes reveal {
-  from {
-    opacity: 0;
-    translate: 0 40px;
-    scale: 0.98;
-  }
-  to {
-    opacity: 1;
-    translate: 0 0;
-    scale: 1;
-  }
-}
-
 @keyframes marquee {
   to {
     transform: translateX(-50%);
@@ -209,29 +232,19 @@ h3 {
 
 @media (prefers-reduced-motion: no-preference) {
   html {
-    scroll-behavior: smooth;
     interpolate-size: allow-keywords;
   }
 
-  /* Hero pieces rise in one after another when the page loads */
+  /* Hero pieces rise in one after another when the page loads (no JavaScript needed) */
   .rise {
-    animation: rise 0.7s var(--ease-out) both;
+    animation: rise var(--dur-enter) var(--ease-out) both;
     animation-delay: var(--delay, 0ms);
   }
 
   /* Hero headline: words slide up one by one */
   .word > span {
-    animation: word-up 0.8s var(--ease-out) both;
+    animation: word-up var(--dur-enter) var(--ease-out) both;
     animation-delay: var(--delay, 0ms);
-  }
-
-  /* Sections and cards fade up as they scroll into view (pure CSS, no JavaScript) */
-  @supports (animation-timeline: view()) {
-    .reveal {
-      animation: reveal linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 25%;
-    }
   }
 
   @supports (animation-timeline: scroll()) {
@@ -257,18 +270,16 @@ h3 {
     animation: drift 9s ease-in-out infinite alternate;
   }
 
-  /* Cards lift slightly on hover */
-  .lift {
-    transition:
-      transform 0.25s var(--ease-out),
-      border-color 0.25s ease;
+  .sweep::before {
+    transition: transform var(--dur-micro-slow) var(--ease-power3);
   }
-  .lift:hover {
-    transform: translateY(-6px);
+  .sweep:hover::before,
+  .sweep:focus-within::before {
+    transform: scaleX(1);
   }
 
   .faq-chevron {
-    transition: transform 0.3s var(--ease-out);
+    transition: transform var(--dur-micro) var(--ease-power3);
   }
 
   /* FAQ answers slide open smoothly (in browsers that support it) */
@@ -276,8 +287,8 @@ h3 {
     block-size: 0;
     overflow: hidden;
     transition:
-      block-size 0.4s var(--ease-out),
-      content-visibility 0.4s allow-discrete;
+      block-size var(--dur-micro-slow) var(--ease-power3),
+      content-visibility var(--dur-micro-slow) allow-discrete;
   }
   .faq-item[open]::details-content {
     block-size: auto;
@@ -305,4 +316,3 @@ h3 {
     scroll-behavior: auto !important;
   }
 }
-

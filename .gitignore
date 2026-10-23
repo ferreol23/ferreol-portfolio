@@ -154,3 +154,6 @@ next-env.d.ts
 *.pem
 /build
 .DS_Store
+
+# Original files you drop in (photos, logos...). Optimized copies go to public/.
+ressources/

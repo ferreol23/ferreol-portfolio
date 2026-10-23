@@ -1,67 +1,71 @@
-import { Mail } from "lucide-react";
+import { ArrowUp, Mail } from "lucide-react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { en } from "@/content/en";
 import { CurrentYear } from "./current-year";
 import { SocialLinks } from "./social-links";
 
-/** Bottom of every page: socials, email, links and copyright. */
+const footerLinks = [
+  { href: "/", label: en.nav.home },
+  { href: "/#work", label: en.nav.work },
+  { href: "/#services", label: en.nav.services },
+  { href: "/#process", label: en.nav.process },
+  { href: "/reviews", label: en.nav.reviews },
+  { href: "/contact", label: en.nav.contact },
+];
+
+/** Bottom of every page: links, email, socials, a giant wordmark and the copyright. */
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div>
-          <p className="font-display text-2xl font-bold">
-            {siteConfig.name}
-            <span className="text-accent-strong" aria-hidden="true">
-              .
-            </span>
-          </p>
-          <p className="mt-2 max-w-xs text-muted">{siteConfig.tagline}</p>
+    <footer className="overflow-hidden border-t border-line">
+      <div className="shell grid gap-12 py-16 md:grid-cols-12">
+        <div className="md:col-span-5">
+          <p className="max-w-xs text-lg text-muted">{siteConfig.tagline}</p>
           <SocialLinks className="mt-6" />
         </div>
 
-        <nav aria-label={en.footer.navLabel}>
-          <ul className="space-y-3">
-            <li>
-              <Link href="/" className="text-muted transition-colors hover:text-text">
-                {en.nav.home}
-              </Link>
-            </li>
-            <li>
-              <Link href="/#work" className="text-muted transition-colors hover:text-text">
-                {en.nav.work}
-              </Link>
-            </li>
-            <li>
-              <Link href="/reviews" className="text-muted transition-colors hover:text-text">
-                {en.nav.reviews}
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact" className="text-muted transition-colors hover:text-text">
-                {en.nav.contact}
-              </Link>
-            </li>
+        <nav aria-label={en.footer.navLabel} className="md:col-span-3">
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-3 md:grid-cols-1">
+            {footerLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="text-muted transition-colors hover:text-text">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
-        <div>
+        <div className="md:col-span-4">
           <p className="text-sm text-muted">{en.footer.emailLabel}</p>
           <a
             href={`mailto:${siteConfig.email}`}
-            className="mt-1 inline-flex items-center gap-2 font-semibold transition-colors hover:text-accent-strong"
+            className="mt-1 inline-flex items-center gap-2 text-lg font-semibold transition-colors hover:text-accent-strong"
           >
-            <Mail className="size-4" aria-hidden="true" />
+            <Mail className="size-5" aria-hidden="true" />
             {siteConfig.email}
           </a>
         </div>
       </div>
 
-      <div className="border-t border-line">
-        <p className="mx-auto max-w-6xl px-4 py-6 text-sm text-muted sm:px-6">
-          © <CurrentYear /> {siteConfig.name}. {en.footer.rights}
+      {/* Giant name across the bottom (decoration: the name is already in the header) */}
+      <div className="shell" aria-hidden="true">
+        <p className="display select-none whitespace-nowrap text-[clamp(4.5rem,21vw,19rem)] leading-[0.78] text-surface-2">
+          {siteConfig.name}
+          <span className="text-accent">.</span>
         </p>
+      </div>
+
+      <div className="border-t border-line">
+        <div className="shell flex flex-wrap items-center justify-between gap-4 py-6 text-sm text-muted">
+          <p>
+            © <CurrentYear /> {siteConfig.name}. {en.footer.rights}
+          </p>
+          <a href="#content" className="inline-flex min-h-11 items-center gap-2 transition-colors hover:text-text">
+            {en.footer.backToTop}
+            <ArrowUp className="size-4" aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </footer>
   );

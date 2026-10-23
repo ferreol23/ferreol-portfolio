@@ -43,6 +43,8 @@ export const LENIS_OPTIONS = {
   autoRaf: false,
   duration: 1.1,
   smoothWheel: true,
+  // Smoothly scroll to "#work"-style links, stopping below the sticky header.
+  anchors: { offset: -88 },
 } as const;
 
 export type Duration = keyof typeof DURATION;
