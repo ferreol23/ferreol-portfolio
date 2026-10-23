@@ -30,10 +30,10 @@ export const en = {
   },
   hero: {
     available: "Available for new projects",
-    intro: "Hi, I'm {name}, a freelance web & app developer.",
+    intro: "Hi, I'm {name}, a full-stack developer.",
     headline: "Websites and apps that help your business grow.",
     subtitle:
-      "From your first business website to a full web or mobile app: I design it, build it and keep it running. You get a clear price, regular updates and support after launch.",
+      "For two years I've been building websites, web apps and mobile apps for businesses and entrepreneurs worldwide. Clean, fast, responsive code, clear communication, and support after delivery.",
     hireOnFiverr: "Hire me on Fiverr",
     contactMe: "Contact me",
     photoAlt: "Portrait of {name}",
@@ -52,8 +52,8 @@ export const en = {
   ],
   about: {
     heading: "About me",
-    lead: "I'm {name}. I turn ideas into websites and apps that are simple to use and easy to grow.",
-    body: "[YOUR STORY] Two or three sentences about you: how you started, what you enjoy building, and the kind of clients you like to help.",
+    lead: "I'm {name}. For the past two years I've helped small businesses, startups and entrepreneurs get a professional online presence, without the headaches.",
+    body: "I take your idea and turn it into something real: a clean business website, a web application, a mobile app, or a fix for a project that isn't working the way it should. I focus on results you can actually see: fast loading, a layout that looks great on phone and desktop, and an experience that's simple for your customers.",
     stackTitle: "Tools I work with",
     facts: {
       basedIn: "Based in",
@@ -62,24 +62,24 @@ export const en = {
     },
   },
   benefits: {
-    heading: "What you get when you work with me",
-    intro: "Beyond the code: the way the project is run matters just as much.",
+    heading: "What you can expect",
+    intro: "Two years of building apps taught me that the best results come from listening first.",
     items: [
       {
+        title: "Honest advice",
+        body: "If something isn't a good idea, I'll tell you, and suggest what will work better for your business.",
+      },
+      {
         title: "Clear communication",
-        body: "Plain-language updates, no jargon. You always know where your project stands and what comes next.",
+        body: "Simple words, without jargon. You always know where your project stands and what comes next.",
       },
       {
-        title: "Mobile-first design",
-        body: "Every page is designed for phones first, then tablets and computers, so it looks right wherever your clients are.",
+        title: "Your deadline and budget, respected",
+        body: "We agree on a delivery time and a fixed price before I start, and I stick to them.",
       },
       {
-        title: "Fast and easy to find",
-        body: "Clean code, optimized images and proper page titles help visitors, and search engines, find you quickly.",
-      },
-      {
-        title: "Secure by default",
-        body: "Forms are checked, spam is filtered and secret keys are never exposed. Safety is built in from the start.",
+        title: "Support after delivery",
+        body: "Not just “goodbye”: I stay available for questions and fixes after your project goes live.",
       },
     ],
   },
@@ -91,7 +91,7 @@ export const en = {
       {
         question: "How much does a project cost?",
         answer:
-          "It depends on what you need. After a short brief, I send you a clear written price before any work starts. You can also see my packages on Fiverr.",
+          "It depends on what you need. After a short brief, I reply with a clear plan and a fixed price before any work starts. You can also see my packages on Fiverr.",
       },
       {
         question: "How long does it take?",
@@ -149,19 +149,19 @@ export const en = {
     steps: [
       {
         title: "Brief",
-        body: "You tell me about your project, your goals and your deadline. I ask questions until the scope is clear.",
+        body: "You tell me what you need, who it's for, and what you like. I ask questions until everything is clear.",
       },
       {
         title: "Proposal & price",
-        body: "You get a written plan with a clear price and timeline before any work starts.",
+        body: "I reply with a clear plan, a delivery time and a fixed price. No surprises.",
       },
       {
         title: "Build with updates",
-        body: "I build in stages and share progress regularly, so you can give feedback along the way.",
+        body: "You get regular updates while I build, and you can give feedback along the way.",
       },
       {
         title: "Delivery & support",
-        body: "I launch your project, show you how to use it, and stay available for fixes and questions.",
+        body: "I hand everything over clearly and stay available for questions and fixes.",
       },
     ],
   },
@@ -205,7 +205,7 @@ export const en = {
     metaTitle: "Contact",
     metaDescription: "Contact {name}, freelance web & app developer: send a message, write an email or hire me on Fiverr.",
     heading: "Let's talk",
-    intro: "Tell me about your project or your problem. You'll get a clear answer, and a price if it's a fit.",
+    intro: "Send me a message with your project and I'll reply with a clear plan and a fixed price. I usually answer within 1–2 hours.",
     directHeading: "Reach me directly",
     emailLabel: "Email",
     formHeading: "Send a message",

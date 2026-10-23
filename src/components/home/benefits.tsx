@@ -1,8 +1,8 @@
-import { MessagesSquare, ShieldCheck, Smartphone, Zap } from "lucide-react";
+import { CalendarCheck, LifeBuoy, Lightbulb, MessagesSquare } from "lucide-react";
 import { en } from "@/content/en";
 
 // One icon per benefit, in the same order as en.benefits.items.
-const icons = [MessagesSquare, Smartphone, Zap, ShieldCheck];
+const icons = [Lightbulb, MessagesSquare, CalendarCheck, LifeBuoy];
 
 /** "What you get": open two-column grid separated by thin lines (no boxes). */
 export function Benefits() {
@@ -22,7 +22,7 @@ export function Benefits() {
 
         <ul className="grid gap-x-10 sm:grid-cols-2 lg:col-span-8">
           {en.benefits.items.map((item, index) => {
-            const Icon = icons[index] ?? Zap;
+            const Icon = icons[index] ?? Lightbulb;
             return (
               <li key={item.title} data-reveal className="border-t border-line pb-12 pt-8">
                 <Icon className="size-8 text-accent-strong" strokeWidth={1.5} aria-hidden="true" />
