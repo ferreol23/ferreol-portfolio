@@ -211,7 +211,6 @@ export const en = {
     formHeading: "Send a message",
     nameLabel: "Your name",
     emailFieldLabel: "Your email",
-    emailHint: "I'll reply to this address.",
     messageLabel: "Your message",
     messageHint: "What do you need, and by when?",
     submit: "Send message",

@@ -94,7 +94,6 @@ export function ContactForm() {
           name="email"
           type="email"
           label={t.emailFieldLabel}
-          hint={t.emailHint}
           value={values.email}
           onChange={set("email")}
           error={errors.email}
