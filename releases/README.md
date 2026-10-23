@@ -20,3 +20,4 @@ Sur GitHub : page du dépôt → **Tags** (ou **Releases**) → choisir la versi
 | Version | Date | Contenu |
 |---|---|---|
 | [v0.1.0](v0.1.0.md) | 2026-10-22 | Base du projet + page d'accueil complète |
+| [v0.2.0](v0.2.0.md) | 2026-10-23 | Refonte complète du front-end |
