@@ -1,4 +1,5 @@
 import { en } from "@/content/en";
+import { ProcessStory } from "./process-story";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -22,11 +23,11 @@ export function Process() {
           </p>
         </div>
 
-        <div data-process className="mt-16 grid gap-12 lg:grid-cols-12">
+        <ProcessStory className="mt-16 grid gap-12 lg:grid-cols-12">
           {/* Pinned big number + progress bar (large screens only, decoration) */}
           <div className="hidden lg:col-span-5 lg:block" aria-hidden="true">
             <div className="sticky top-32">
-              <div className="relative h-[clamp(11rem,17vw,16rem)]">
+              <div className="relative h-[clamp(11rem,17vw,16rem)] overflow-hidden">
                 {steps.map((step, index) => (
                   <span
                     key={step.title}
@@ -54,7 +55,7 @@ export function Process() {
               </li>
             ))}
           </ol>
-        </div>
+        </ProcessStory>
       </div>
     </section>
   );
