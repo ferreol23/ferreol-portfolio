@@ -3,6 +3,7 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { en } from "@/content/en";
 import { CurrentYear } from "./current-year";
+import { FooterWordmark } from "./footer-wordmark";
 import { SocialLinks } from "./social-links";
 
 const footerLinks = [
@@ -49,12 +50,7 @@ export function SiteFooter() {
       </div>
 
       {/* Giant name across the bottom (decoration: the name is already in the header) */}
-      <div className="shell" aria-hidden="true">
-        <p className="display select-none whitespace-nowrap text-[clamp(4.5rem,21vw,19rem)] leading-[0.78] text-surface-2">
-          {siteConfig.name}
-          <span className="text-accent">.</span>
-        </p>
-      </div>
+      <FooterWordmark name={siteConfig.name} />
 
       <div className="border-t border-line">
         <div className="shell flex flex-wrap items-center justify-between gap-4 py-6 text-sm text-muted">
