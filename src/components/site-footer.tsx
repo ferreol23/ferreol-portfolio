@@ -2,6 +2,7 @@ import { ArrowUp, Mail } from "lucide-react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { en } from "@/content/en";
+import { ConsentSettingsButton } from "./consent/consent-banner";
 import { CurrentYear } from "./current-year";
 import { FooterWordmark } from "./footer-wordmark";
 import { SocialLinks } from "./social-links";
@@ -57,10 +58,13 @@ export function SiteFooter() {
           <p>
             © <CurrentYear /> {siteConfig.name}. {en.footer.rights}
           </p>
-          <a href="#content" className="inline-flex min-h-11 items-center gap-2 transition-colors hover:text-text">
-            {en.footer.backToTop}
-            <ArrowUp className="size-4" aria-hidden="true" />
-          </a>
+          <div className="flex flex-wrap items-center gap-x-6">
+            <ConsentSettingsButton className="inline-flex min-h-11 items-center transition-colors hover:text-text" />
+            <a href="#content" className="inline-flex min-h-11 items-center gap-2 transition-colors hover:text-text">
+              {en.footer.backToTop}
+              <ArrowUp className="size-4" aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

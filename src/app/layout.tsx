@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Atkinson_Hyperlegible_Next, Bricolage_Grotesque } from "next/font/google";
 import Script from "next/script";
+import { ConsentBanner } from "@/components/consent/consent-banner";
+import { VisitTracker } from "@/components/consent/visit-tracker";
 import { MotionProvider } from "@/components/motion-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -49,6 +51,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        <ConsentBanner />
+        <VisitTracker />
       </body>
     </html>
   );
