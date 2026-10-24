@@ -4,8 +4,8 @@ import Script from "next/script";
 import { MotionProvider } from "@/components/motion-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { siteConfig } from "@/config/site";
 import { en } from "@/content/en";
+import { rootMetadata } from "@/lib/metadata";
 import "./globals.css";
 
 // Headlines: characterful grotesque (its width axis gives the condensed poster look).
@@ -24,14 +24,7 @@ const atkinson = Atkinson_Hyperlegible_Next({
   fallback: ["system-ui", "sans-serif"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default: `${siteConfig.name} | ${siteConfig.tagline}`,
-    template: `%s | ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-};
+export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

@@ -7,13 +7,15 @@ import { RevealScope } from "@/components/reveal-scope";
 import { socialLinks } from "@/config/links";
 import { siteConfig } from "@/config/site";
 import { en, fill } from "@/content/en";
+import { pageMetadata } from "@/lib/metadata";
 
 const t = en.contactPage;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: t.metaTitle,
   description: fill(t.metaDescription, { name: siteConfig.name }),
-};
+  path: "/contact",
+});
 
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as CSSProperties;
 

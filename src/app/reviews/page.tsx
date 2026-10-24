@@ -6,13 +6,15 @@ import { ReviewForm } from "@/components/reviews/review-form";
 import { ReviewsList, ReviewsSkeleton } from "@/components/reviews/reviews-list";
 import { siteConfig } from "@/config/site";
 import { en, fill } from "@/content/en";
+import { pageMetadata } from "@/lib/metadata";
 
 const t = en.reviewsPage;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: t.metaTitle,
   description: fill(t.metaDescription, { name: siteConfig.name }),
-};
+  path: "/reviews",
+});
 
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as CSSProperties;
 
