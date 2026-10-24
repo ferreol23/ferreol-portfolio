@@ -238,6 +238,14 @@ export const en = {
     // Hidden anti-spam field: real visitors never see or fill it.
     honeypotLabel: "Leave this field empty",
   },
+  notFound: {
+    metaTitle: "Page not found",
+    code: "404",
+    heading: "This page doesn't exist",
+    body: "The link may be broken, or the page may have moved. Let's get you back on track.",
+    home: "Back to home",
+    contact: "Contact me",
+  },
   footer: {
     emailLabel: "Email",
     rights: "All rights reserved.",
