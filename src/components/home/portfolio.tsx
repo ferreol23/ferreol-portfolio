@@ -2,51 +2,72 @@ import { ArrowUpRight, ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { projects, type Project } from "@/config/projects";
 import { en } from "@/content/en";
-import { WorkTilt } from "./work-tilt";
+import { WorkShrink } from "./work-shrink";
 
 /**
- * Projects as large alternating rows (image / text), filled from src/config/projects.ts.
- * The title and the first project tilt into view in 3D (WorkTilt); the rest reveal normally.
+ * "Selected work": a full-width banner that shrinks into a card while scrolling
+ * (WorkShrink), then the projects as large alternating rows (image / text),
+ * filled from src/config/projects.ts.
  */
 export function Portfolio() {
-  const [first, ...rest] = projects;
-
   return (
-    <section id="work" aria-labelledby="work-heading" className="shell scroll-mt-24 py-24 sm:py-32">
-      <WorkTilt>
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
-          <h2 id="work-heading" className="display text-[clamp(2.75rem,6.5vw,5.5rem)] lg:col-span-7">
-            {en.portfolio.heading}
-          </h2>
-          <p className="max-w-md text-lg text-muted lg:col-span-5 lg:justify-self-end">{en.portfolio.intro}</p>
+    <section id="work" aria-labelledby="work-heading" className="scroll-mt-24 pb-24 sm:pb-32">
+      <WorkShrink media={<BannerBackground />}>
+        <div className="shell flex min-h-[80svh] flex-col justify-end gap-6 py-16 sm:py-24 lg:flex-row lg:items-end lg:justify-between">
+          <div data-shrink-left>
+            <h2 id="work-heading" data-split className="display text-[clamp(3.5rem,12vw,11rem)]">
+              {en.portfolio.heading}
+              <span className="text-accent-strong">.</span>
+            </h2>
+          </div>
+          <div data-shrink-right>
+            <p data-reveal className="max-w-sm text-lg text-muted lg:pb-4 lg:text-right">
+              {en.portfolio.intro}
+            </p>
+          </div>
         </div>
+      </WorkShrink>
 
-        {first && (
-          <ul className="mt-16">
-            <ProjectRow project={first} index={0} reveal={false} />
-          </ul>
-        )}
-      </WorkTilt>
-
-      {rest.length > 0 && (
-        <ul className="mt-20 space-y-20 lg:mt-28 lg:space-y-28">
-          {rest.map((project, index) => (
-            <ProjectRow key={`${project.title}-${index + 1}`} project={project} index={index + 1} reveal />
-          ))}
-        </ul>
-      )}
+      <ul className="shell mt-20 space-y-20 lg:mt-28 lg:space-y-28">
+        {projects.map((project, index) => (
+          <ProjectRow key={`${project.title}-${index}`} project={project} index={index} />
+        ))}
+      </ul>
     </section>
   );
 }
 
-/** One project. `reveal` adds the fade-up on scroll (off inside WorkTilt, which has its own motion). */
-function ProjectRow({ project, index, reveal }: { project: Project; index: number; reveal: boolean }) {
+/** Orange glows on a faint grid, behind the banner text (it zooms out while scrolling). */
+function BannerBackground() {
+  return (
+    <>
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(55% 75% at 85% 15%, var(--glow), transparent 65%), radial-gradient(45% 60% at 0% 100%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 70%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 opacity-60"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px)",
+          backgroundSize: "4rem 4rem",
+          maskImage: "radial-gradient(ellipse at 60% 40%, black 20%, transparent 75%)",
+        }}
+      />
+    </>
+  );
+}
+
+/** One project row; even rows show the image on the left, odd rows on the right. */
+function ProjectRow({ project, index }: { project: Project; index: number }) {
   const flip = index % 2 === 1;
-  const revealAttr = reveal ? { "data-reveal": true } : {};
 
   return (
     <li className="group grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-      <div {...revealAttr} className={`lg:col-span-7 ${flip ? "lg:order-2" : ""}`}>
+      <div data-reveal className={`lg:col-span-7 ${flip ? "lg:order-2" : ""}`}>
         <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-line bg-surface">
           {/* Taller than its frame so it can drift slightly while scrolling */}
           <div data-parallax className="absolute inset-x-0 -inset-y-[8%]">
@@ -73,7 +94,7 @@ function ProjectRow({ project, index, reveal }: { project: Project; index: numbe
         </div>
       </div>
 
-      <div {...revealAttr} className={`lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
+      <div data-reveal className={`lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
         <h3 className="display text-[clamp(2.25rem,4vw,3.5rem)]">{project.title}</h3>
         <p className="mt-4 text-lg text-muted">{project.description}</p>
         <ul className="mt-6 flex flex-wrap gap-2">

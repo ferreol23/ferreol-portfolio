@@ -12,7 +12,8 @@ React-idiomatic motion component is the better fit.
 
 - **Animate only `transform` and `opacity`.** Never animate `width`, `height`,
   `top`, `left`, `margin` (they trigger layout). Use GSAP's `x`/`y`/`scale`/
-  `rotation` and `autoAlpha`.
+  `rotation` and `autoAlpha`. *Exception:* `clip-path` (paint only, no layout)
+  in `WorkShrink`, to reproduce the fuzeshop.fr "shrink on scroll" banner.
 - **Durations** — micro-interactions **0.2–0.4s**, appearances **0.6–1s**.
   Default easing **`power3.out`**. Use the tokens, don't hardcode:
   `src/config/motion.ts` (JS) / `--dur-*`, `--ease-power3` (CSS) — kept in sync.
@@ -25,7 +26,7 @@ React-idiomatic motion component is the better fit.
   and enhance.
 - **One signature effect per page**, everything else micro-interactions. Restraint
   over spectacle. *Exception chosen by Ferreol:* the home page has two —
-  `ProcessStory` ("How I work") and `WorkTilt` (3D tilt into "Selected work").
+  `ProcessStory` ("How I work") and `WorkShrink` (banner that shrinks into a card, into "Selected work").
   Don't add a third.
 - **One animation tool per element** — never GSAP *and* motion on the same element.
 
