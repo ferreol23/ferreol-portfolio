@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Temporary "F" mark in the site's orange. Replace this file with your real logo. -->
+  <rect width="32" height="32" rx="7" fill="#ff6b1a"/>
+  <path fill="#0b0b0c" d="M10 7h13v5h-8v3h7v4.5h-7V25h-5z"/>
+</svg>
