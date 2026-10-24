@@ -23,3 +23,4 @@ Sur GitHub : page du dépôt → **Tags** (ou **Releases**) → choisir la versi
 | [v0.2.0](v0.2.0.md) | 2026-10-23 | Refonte complète du front-end |
 | [v0.3.0](v0.3.0.md) | 2026-10-23 | Pages Avis et Contact |
 | [v0.4.0](v0.4.0.md) | 2026-10-24 | Tes vraies infos + animations GSAP |
+| [v0.5.0](v0.5.0.md) | 2026-10-24 | Consentement + visites, 404, SEO, icône « F », sécurité, README |
