@@ -24,7 +24,9 @@ React-idiomatic motion component is the better fit.
   entrance animation that only completes in JS. Start from a visible, correct DOM
   and enhance.
 - **One signature effect per page**, everything else micro-interactions. Restraint
-  over spectacle.
+  over spectacle. *Exception chosen by Ferreol:* the home page has two —
+  `ProcessStory` ("How I work") and `WorkTilt` (3D tilt into "Selected work").
+  Don't add a third.
 - **One animation tool per element** — never GSAP *and* motion on the same element.
 
 ## Workflow rules
