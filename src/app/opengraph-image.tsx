@@ -22,10 +22,12 @@ const subline = "Full-stack developer · Websites, web apps & mobile apps";
 
 /**
  * Downloads only the letters we need from one of the site's fonts.
- * If Google Fonts can't be reached during the build, the image still works
- * with the built-in font.
+ * "use cache" keeps the result, so the image is drawn once at build time
+ * instead of on every visit. If Google Fonts can't be reached, the image
+ * still works with the built-in font.
  */
 async function loadFont(family: string, text: string): Promise<ArrayBuffer | null> {
+  "use cache";
   try {
     const url = `https://fonts.googleapis.com/css2?family=${family}&text=${encodeURIComponent(text)}`;
     const css = await (await fetch(url)).text();

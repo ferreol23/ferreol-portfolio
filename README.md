@@ -74,7 +74,7 @@ deux envois.
 
 - [ ] Lien **Fiverr** → `FIVERR_URL` dans `src/config/links.ts`
 - [ ] Numéro **WhatsApp** (format international, chiffres seulement) → `WHATSAPP_URL`
-- [ ] **Projets** + **captures d'écran** → `src/config/projects.ts` (captures dans `public/images/`)
+- [ ] **Projets** + **captures d'écran** → `src/config/projects.ts` (captures dans `public/projects/`, idéalement 1600×1000)
 - [ ] **Vraie photo** (l'actuelle est générée par IA) → `photo` dans `src/config/site.ts`
 - [ ] **Délai habituel** pour un site → question « How long does it take? » dans `src/content/en.ts`
 - [ ] **Nom de domaine** → `url` dans `src/config/site.ts` (sinon sitemap et partages pointent vers example.com)

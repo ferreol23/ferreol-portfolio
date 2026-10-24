@@ -242,7 +242,7 @@ export const en = {
     label: "Privacy choice",
     title: "Can I count your visit?",
     body: "With your OK, I only record which pages are opened and when. No cookies, no ads, nothing that identifies you. It helps me improve the site.",
-    accept: "Yes, that's fine",
+    accept: "Accept",
     decline: "No thanks",
     // Footer link that brings the banner back.
     settings: "Privacy settings",
