@@ -123,10 +123,12 @@ export function Hero() {
             </figcaption>
           </figure>
 
-          {/* Rotating round badge on the photo's corner (decoration only) */}
+          {/* Rotating round badge on the photo's corner (decoration only).
+              overflow-hidden: the spinning square SVG's corners would otherwise stick out
+              past the circle (and past the screen edge, causing a sideways scroll). */}
           <div
             aria-hidden="true"
-            className="absolute -right-1 -top-8 grid size-28 place-items-center rounded-full border border-line bg-bg text-text sm:-right-8 sm:size-32"
+            className="absolute -right-1 -top-8 grid size-28 place-items-center overflow-hidden rounded-full border border-line bg-bg text-text sm:-right-8 sm:size-32"
           >
             <svg viewBox="0 0 100 100" className="spin-slow absolute inset-0 size-full">
               <defs>
