@@ -30,5 +30,14 @@ export const siteConfig = {
   responseTime: "Usually within 1–2 hours",
 
   // Tools you really use, shown in the "About me" section. Replace with your own list.
-  stack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Firebase", "Stripe", "VS Code", "Claude (AI assistant)"],
+  stack: [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Supabase",
+    "Firebase",
+    "Stripe",
+    "VS Code",
+    "Claude (AI assistant)",
+  ],
 } as const;

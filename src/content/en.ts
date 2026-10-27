@@ -292,6 +292,8 @@ export const en = {
   footer: {
     emailLabel: "Email",
     whatsappLabel: "WhatsApp",
+    // Small bubble shown when the mouse is over the giant name at the very bottom.
+    wordmarkTip: "Designed & built with care by {name}",
     rights: "All rights reserved.",
     navLabel: "Footer",
     backToTop: "Back to top",
