@@ -2,8 +2,11 @@ import { ArrowRight, ArrowUpRight, ImageIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { BrandIcon } from "@/components/brand-icon";
+import { WHATSAPP_URL, isPlaceholder, whatsappLink } from "@/config/links";
 import { projects, type Project } from "@/config/projects";
-import { en } from "@/content/en";
+import { siteConfig } from "@/config/site";
+import { en, fill } from "@/content/en";
 import { WorkShrink } from "./work-shrink";
 
 /**
@@ -179,6 +182,23 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             />
             <span className="sr-only">: {project.title}</span>
           </Link>
+          {/* Hidden until your WhatsApp number is filled in (src/config/links.ts). */}
+          {!isPlaceholder(WHATSAPP_URL) && (
+            <a
+              href={whatsappLink(
+                fill(en.contactPage.similarMessage, { name: siteConfig.name, project: project.title }),
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 font-semibold text-muted transition-colors hover:text-accent-strong"
+            >
+              <BrandIcon name="whatsapp" className="size-5" />
+              {en.whatsapp.ask}
+              <span className="sr-only">
+                : {project.title} {en.common.opensInNewTab}
+              </span>
+            </a>
+          )}
         </div>
       </div>
     </li>

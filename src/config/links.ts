@@ -1,3 +1,6 @@
+import { siteConfig } from "@/config/site";
+import { en, fill } from "@/content/en";
+
 /**
  * Your external profile links.
  * Replace each [PLACEHOLDER] part with your real username / number.
@@ -8,6 +11,11 @@ export const LINKEDIN_URL = "https://www.linkedin.com/in/ferreol-code-a190083b3/
 export const INSTAGRAM_URL = "https://www.instagram.com/ferreol_code/";
 // WhatsApp: your number in international format, digits only (e.g. 33612345678).
 export const WHATSAPP_URL = "https://wa.me/[YOUR-PHONE-NUMBER]";
+
+/** A WhatsApp link that opens the chat with a message already written (the visitor can still edit it). */
+export function whatsappLink(text: string): string {
+  return `${WHATSAPP_URL}?text=${encodeURIComponent(text)}`;
+}
 
 export type SocialName = "fiverr" | "github" | "linkedin" | "instagram" | "whatsapp";
 
@@ -20,7 +28,7 @@ const allSocialLinks: { name: SocialName; label: string; href: string }[] = [
   { name: "github", label: "GitHub", href: GITHUB_URL },
   { name: "linkedin", label: "LinkedIn", href: LINKEDIN_URL },
   { name: "instagram", label: "Instagram", href: INSTAGRAM_URL },
-  { name: "whatsapp", label: "WhatsApp", href: WHATSAPP_URL },
+  { name: "whatsapp", label: "WhatsApp", href: whatsappLink(fill(en.whatsapp.hello, { name: siteConfig.name })) },
 ];
 
 export const socialLinks = allSocialLinks.filter((link) => !isPlaceholder(link.href));

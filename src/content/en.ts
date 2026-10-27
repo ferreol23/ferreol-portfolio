@@ -266,6 +266,12 @@ export const en = {
     // Hidden anti-spam field: real visitors never see or fill it.
     honeypotLabel: "Leave this field empty",
   },
+  whatsapp: {
+    // Message already written when someone opens WhatsApp from the site (they can edit it before sending).
+    hello: "Hi {name}, I found you on your website. I have a project: ",
+    // Link under each project (the message is contactPage.similarMessage).
+    ask: "Ask on WhatsApp",
+  },
   consent: {
     label: "Privacy choice",
     title: "Can I count your visit?",
