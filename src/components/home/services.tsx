@@ -14,7 +14,7 @@ const types: ProjectType[] = ["website", "webapp", "mobile", "fix"];
  */
 export function Services() {
   return (
-    <section id="services" aria-labelledby="services-heading" className="scroll-mt-24 py-24 sm:py-32">
+    <section id="services" aria-labelledby="services-heading" className="py-24 sm:py-32">
       <div className="shell grid gap-6 lg:grid-cols-12 lg:items-end">
         <h2 id="services-heading" data-split className="display text-[clamp(2.75rem,6.5vw,5.5rem)] lg:col-span-7">
           {en.services.heading}

@@ -12,7 +12,7 @@ export function Process() {
   const steps = en.process.steps;
 
   return (
-    <section id="process" aria-labelledby="process-heading" className="scroll-mt-24 border-y border-line bg-surface">
+    <section id="process" aria-labelledby="process-heading" className="border-y border-line bg-surface">
       <div className="shell py-24 sm:py-32">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
           <h2 id="process-heading" data-split className="display text-[clamp(2.75rem,6.5vw,5.5rem)] lg:col-span-7">
@@ -46,11 +46,17 @@ export function Process() {
 
           <ol className="lg:col-span-7">
             {steps.map((step, index) => (
-              <li key={step.title} data-step className="border-t border-line py-10 lg:flex lg:min-h-[52vh] lg:flex-col lg:justify-center lg:py-16">
+              <li
+                key={step.title}
+                data-step
+                className="border-t border-line py-10 lg:flex lg:min-h-[52vh] lg:flex-col lg:justify-center lg:py-16"
+              >
                 <p className="font-display text-sm font-bold text-accent-strong">
                   {en.process.stepLabel} {pad(index + 1)}
                 </p>
-                <h3 className="mt-3 font-display text-[clamp(2rem,3.6vw,3rem)] font-bold leading-tight">{step.title}</h3>
+                <h3 className="mt-3 font-display text-[clamp(2rem,3.6vw,3rem)] font-bold leading-tight">
+                  {step.title}
+                </h3>
                 <p className="mt-4 max-w-md text-lg text-muted">{step.body}</p>
               </li>
             ))}
