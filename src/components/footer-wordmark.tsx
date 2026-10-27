@@ -2,23 +2,24 @@
 
 /*
   FooterWordmark — the giant name at the bottom of every page.
-  Its letters rise one after another the first time it scrolls into view
-  (GSAP SplitText). Decoration only: hidden from screen readers.
-  Without JavaScript or with reduced motion, it's simply there.
-
-  On hover, a small orange bubble ("Designed & built with care by …") appears.
-  With a mouse it follows the cursor (GSAP quickTo, transform only); otherwise
-  it simply shows above the end of the name.
+  - Its letters rise one after another the first time it scrolls into view.
+  - Mouse: the letters near the cursor lift and lean, like a wave following it.
+  - Touch: the letter under the finger hops (tap or slide along the name).
+  Only transform is animated (GSAP quickTo on y / rotation, pivot at the bottom).
+  Decoration only: hidden from screen readers. Without JavaScript or with
+  reduced motion, it's simply there.
 */
 
-import { Heart } from "lucide-react";
 import { useRef } from "react";
 import { gsap } from "gsap";
-import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import { prefersReducedMotion } from "@/animations/setup";
 import { DURATION, EASE } from "@/config/motion";
-import { en, fill } from "@/content/en";
+
+// How high a letter lifts, as a share of its height.
+const LIFT = 0.2;
+// Biggest lean, in degrees, for letters at the edge of the wave.
+const LEAN = 25;
 
 export function FooterWordmark({ name }: { name: string }) {
   const scope = useRef<HTMLDivElement>(null);
@@ -26,71 +27,105 @@ export function FooterWordmark({ name }: { name: string }) {
   useGSAP(
     () => {
       const root = scope.current;
-      const text = root?.querySelector<HTMLElement>("p");
-      if (!root || !text || prefersReducedMotion()) return;
+      const row = root?.querySelector<HTMLElement>("[data-row]");
+      if (!root || !row || prefersReducedMotion()) return;
+      const chars = gsap.utils.toArray<HTMLElement>("[data-char]", root);
+      const letters = gsap.utils.toArray<HTMLElement>("[data-letter]", root);
 
-      SplitText.create(text, {
-        type: "lines,chars",
-        mask: "lines",
-        aria: "none",
-        autoSplit: true,
-        onSplit: (self) =>
-          gsap.from(self.chars, {
-            yPercent: 110,
-            duration: DURATION.enterSlow,
-            ease: EASE.out,
-            stagger: 0.06,
-            scrollTrigger: { trigger: root, start: "top 95%", once: true },
-          }),
+      // Entrance: each letter rises from below the edge.
+      gsap.from(chars, {
+        yPercent: 130,
+        duration: DURATION.enterSlow,
+        ease: EASE.out,
+        stagger: 0.05,
+        scrollTrigger: { trigger: row, start: "top 95%", once: true },
       });
 
-      // The bubble follows the cursor, only with a real mouse.
-      const area = root.querySelector<HTMLElement>("[data-tip-area]");
-      const tip = root.querySelector<HTMLElement>("[data-tip]");
-      if (!area || !tip || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+      const yTo = letters.map((letter) => gsap.quickTo(letter, "y", { duration: 0.6, ease: EASE.out }));
+      const rotateTo = letters.map((letter) => gsap.quickTo(letter, "rotation", { duration: 0.6, ease: EASE.out }));
+      const lift = () => letters[0].offsetHeight * LIFT;
+      // Measured on the (never rotated) wrappers, so leaning letters don't skew the maths.
+      const centers = () =>
+        chars.map((char) => {
+          const box = char.getBoundingClientRect();
+          return box.left + box.width / 2;
+        });
 
-      // Anchor the bubble's bottom-center just above the cursor.
-      gsap.set(tip, { left: 0, top: 0, right: "auto", bottom: "auto", xPercent: -50, yPercent: -140 });
-      const xTo = gsap.quickTo(tip, "x", { duration: 0.35, ease: EASE.out });
-      const yTo = gsap.quickTo(tip, "y", { duration: 0.35, ease: EASE.out });
-
-      const move = (event: PointerEvent, jump = false) => {
-        const box = area.getBoundingClientRect();
-        // Keep the whole bubble over the name, so it's never cut off at the screen edge.
-        const half = tip.offsetWidth / 2;
-        const x = gsap.utils.clamp(half, Math.max(half, box.width - half), event.clientX - box.left);
-        const y = event.clientY - box.top;
-        // On entry, start right at the cursor instead of sliding in from the last spot.
-        xTo(x, jump ? x : undefined);
-        yTo(y, jump ? y : undefined);
+      // Mouse: smooth bump centered on the cursor, fading out over a fifth of the name's width.
+      const wave = (clientX: number) => {
+        const reach = row.offsetWidth / 5;
+        const height = lift();
+        centers().forEach((center, index) => {
+          const distance = clientX - center;
+          const t = Math.max(0, 1 - Math.abs(distance) / reach);
+          const bump = t * t * (3 - 2 * t); // smoothstep: soft at the edges
+          yTo[index](-bump * height);
+          rotateTo[index]((-distance / reach) * t * LEAN);
+        });
       };
-      const enter = (event: PointerEvent) => move(event, true);
+      const rest = () => letters.forEach((_, index) => (yTo[index](0), rotateTo[index](0)));
 
-      area.addEventListener("pointerenter", enter);
-      area.addEventListener("pointermove", move);
+      // Touch: the letter under the finger hops once, then lands.
+      let lastHop = -1;
+      const hop = (index: number) => {
+        yTo[index](-lift() * 1.15);
+        rotateTo[index](gsap.utils.random(-12, 12));
+        gsap.delayedCall(0.16, () => (yTo[index](0), rotateTo[index](0)));
+      };
+      const touchAt = (clientX: number) => {
+        const index = chars.findIndex((char) => {
+          const box = char.getBoundingClientRect();
+          return clientX >= box.left && clientX <= box.right;
+        });
+        if (index !== -1 && index !== lastHop) hop(index);
+        lastHop = index;
+      };
+
+      const onMove = (event: PointerEvent) =>
+        event.pointerType === "mouse" ? wave(event.clientX) : touchAt(event.clientX);
+      const onDown = (event: PointerEvent) => {
+        if (event.pointerType === "mouse") return;
+        lastHop = -1;
+        touchAt(event.clientX);
+      };
+      const onLeave = (event: PointerEvent) => {
+        lastHop = -1;
+        if (event.pointerType === "mouse") rest();
+      };
+
+      row.addEventListener("pointermove", onMove);
+      row.addEventListener("pointerdown", onDown);
+      row.addEventListener("pointerleave", onLeave);
       return () => {
-        area.removeEventListener("pointerenter", enter);
-        area.removeEventListener("pointermove", move);
+        row.removeEventListener("pointermove", onMove);
+        row.removeEventListener("pointerdown", onDown);
+        row.removeEventListener("pointerleave", onLeave);
       };
     },
     { scope },
   );
 
+  // One wrapper per letter (rises on entrance) around the letter itself (lifts and leans).
+  const letters = [...name.split("").map((char) => ({ char, accent: false })), { char: ".", accent: true }];
+
   return (
     <div ref={scope} className="shell" aria-hidden="true">
-      <div data-tip-area className="group relative inline-block cursor-default">
-        <p className="display select-none whitespace-nowrap text-[clamp(4.5rem,21vw,19rem)] leading-[0.78] text-surface-2">
-          {name}
-          <span className="text-accent">.</span>
-        </p>
-        <span
-          data-tip
-          className="pointer-events-none absolute bottom-full right-0 mb-3 inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-accent px-4 py-2 text-sm font-semibold text-on-accent opacity-0 shadow-lg shadow-black/20 transition-opacity duration-200 group-hover:opacity-100"
-        >
-          <Heart className="size-4 fill-current" />
-          {fill(en.footer.wordmarkTip, { name })}
-        </span>
-      </div>
+      {/* Top padding = room for the letters to lift; overflow-hidden hides them below before the entrance. */}
+      <p
+        data-row
+        className="display flex w-fit touch-pan-y select-none overflow-hidden whitespace-nowrap pt-[0.3em] text-[clamp(4.5rem,21vw,19rem)] leading-[0.78] text-surface-2"
+      >
+        {letters.map(({ char, accent }, index) => (
+          <span key={`${char}-${index}`} data-char className="inline-block">
+            <span
+              data-letter
+              className={`inline-block origin-bottom will-change-transform ${accent ? "text-accent" : ""}`}
+            >
+              {char}
+            </span>
+          </span>
+        ))}
+      </p>
     </div>
   );
 }
