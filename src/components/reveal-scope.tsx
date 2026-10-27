@@ -3,8 +3,7 @@
 /*
   RevealScope — scroll effects for the home page:
     - elements marked `data-reveal` fade up into view as they scroll in;
-    - big headings marked `data-split` slide up line by line (SplitText, masked lines);
-    - layers marked `data-parallax` (project images) drift slightly while scrolling.
+    - big headings marked `data-split` slide up line by line (SplitText, masked lines).
   -------------------------------------------------------------------------------
   - The page is fully visible without JavaScript; GSAP only hides an element right
     before animating it in.
@@ -62,19 +61,6 @@ export function RevealScope({ children }: { children: ReactNode }) {
               scrollTrigger: { trigger: heading, start: "top 85%", once: true },
             }),
         });
-      });
-
-      // Project images drift slightly inside their frame while scrolling (small range, scroll-linked).
-      root.querySelectorAll<HTMLElement>("[data-parallax]").forEach((layer) => {
-        gsap.fromTo(
-          layer,
-          { yPercent: -6 },
-          {
-            yPercent: 6,
-            ease: "none",
-            scrollTrigger: { trigger: layer.parentElement, start: "top bottom", end: "bottom top", scrub: true },
-          },
-        );
       });
     },
     { scope },

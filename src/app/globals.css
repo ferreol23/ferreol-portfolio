@@ -173,7 +173,7 @@ h3 {
   ------
   CSS motion lives inside the "no-preference" block, so visitors who turned on
   "reduce motion" get a calm, still page. Scroll-linked motion (reveals, the
-  "How I work" story, image parallax) is done with GSAP in the components.
+  "How I work" story, the "Selected work" banner) is done with GSAP in the components.
 */
 :root {
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
