@@ -9,8 +9,8 @@ export const FIVERR_URL = "https://www.fiverr.com/[YOUR-FIVERR-USERNAME]";
 export const GITHUB_URL = "https://github.com/ferreol23";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/ferreol-code-a190083b3/";
 export const INSTAGRAM_URL = "https://www.instagram.com/ferreol_code/";
-// WhatsApp: your number in international format, digits only (e.g. 33612345678).
-export const WHATSAPP_URL = "https://wa.me/[YOUR-PHONE-NUMBER]";
+// WhatsApp: built from the number in src/config/site.ts (wa.me needs digits only).
+export const WHATSAPP_URL = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`;
 
 /** A WhatsApp link that opens the chat with a message already written (the visitor can still edit it). */
 export function whatsappLink(text: string): string {

@@ -1,7 +1,9 @@
 import { ArrowUp, Mail } from "lucide-react";
 import Link from "next/link";
+import { whatsappLink } from "@/config/links";
 import { siteConfig } from "@/config/site";
-import { en } from "@/content/en";
+import { en, fill } from "@/content/en";
+import { BrandIcon } from "./brand-icon";
 import { ConsentSettingsButton } from "./consent/consent-banner";
 import { CurrentYear } from "./current-year";
 import { FooterWordmark } from "./footer-wordmark";
@@ -16,7 +18,7 @@ const footerLinks = [
   { href: "/contact", label: en.nav.contact },
 ];
 
-/** Bottom of every page: links, email, socials, a giant wordmark and the copyright. */
+/** Bottom of every page: links, email, WhatsApp, socials, a giant wordmark and the copyright. */
 export function SiteFooter() {
   return (
     <footer className="overflow-hidden border-t border-line">
@@ -38,15 +40,30 @@ export function SiteFooter() {
           </ul>
         </nav>
 
-        <div className="md:col-span-4">
-          <p className="text-sm text-muted">{en.footer.emailLabel}</p>
-          <a
-            href={`mailto:${siteConfig.email}`}
-            className="mt-1 inline-flex items-center gap-2 text-lg font-semibold transition-colors hover:text-accent-strong"
-          >
-            <Mail className="size-5" aria-hidden="true" />
-            {siteConfig.email}
-          </a>
+        <div className="space-y-6 md:col-span-4">
+          <div>
+            <p className="text-sm text-muted">{en.footer.emailLabel}</p>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="mt-1 inline-flex items-center gap-2 text-lg font-semibold transition-colors hover:text-accent-strong"
+            >
+              <Mail className="size-5" aria-hidden="true" />
+              {siteConfig.email}
+            </a>
+          </div>
+          <div>
+            <p className="text-sm text-muted">{en.footer.whatsappLabel}</p>
+            <a
+              href={whatsappLink(fill(en.whatsapp.hello, { name: siteConfig.name }))}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 inline-flex items-center gap-2 text-lg font-semibold transition-colors hover:text-accent-strong"
+            >
+              <BrandIcon name="whatsapp" className="size-5" />
+              {siteConfig.whatsapp}
+              <span className="sr-only">{en.common.opensInNewTab}</span>
+            </a>
+          </div>
         </div>
       </div>
 

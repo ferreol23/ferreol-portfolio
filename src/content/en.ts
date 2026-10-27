@@ -291,6 +291,7 @@ export const en = {
   },
   footer: {
     emailLabel: "Email",
+    whatsappLabel: "WhatsApp",
     rights: "All rights reserved.",
     navLabel: "Footer",
     backToTop: "Back to top",

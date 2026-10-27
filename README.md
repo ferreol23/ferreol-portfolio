@@ -41,7 +41,8 @@ Autres commandes : `npm run lint` (vérifie le code), `npm run build` (prépare 
 | Je veux changer… | Fichier |
 |---|---|
 | Nom, slogan, email, adresse du site, photo, langues | `src/config/site.ts` |
-| Liens Fiverr, GitHub, LinkedIn, Instagram, WhatsApp | `src/config/links.ts` |
+| Liens Fiverr, GitHub, LinkedIn, Instagram | `src/config/links.ts` |
+| Numéro WhatsApp | `src/config/site.ts` (`whatsapp`) |
 | Mes projets (textes, captures, liens) | `src/config/projects.ts` |
 | Tous les textes du site (titres, FAQ, boutons…) | `src/content/en.ts` |
 | La couleur orange | `--accent` dans `src/app/globals.css` |
@@ -73,7 +74,7 @@ deux envois.
 ### Infos à recevoir de Ferreol
 
 - [ ] Lien **Fiverr** → `FIVERR_URL` dans `src/config/links.ts`
-- [ ] Numéro **WhatsApp** (format international, chiffres seulement) → `WHATSAPP_URL`
+- [x] Numéro **WhatsApp** → `whatsapp` dans `src/config/site.ts` (affiché en bas de chaque page)
 - [ ] **Projets** + **captures d'écran** → `src/config/projects.ts` (captures dans `public/projects/`, idéalement 1600×1000)
 - [ ] **Vraie photo** (l'actuelle est générée par IA) → `photo` dans `src/config/site.ts`
 - [ ] **Délai habituel** pour un site → question « How long does it take? » dans `src/content/en.ts`

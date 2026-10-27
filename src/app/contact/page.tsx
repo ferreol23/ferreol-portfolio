@@ -35,6 +35,7 @@ export default function ContactPage() {
     ...socialLinks.map((link) => ({
       key: link.name,
       label: link.label,
+      detail: link.name === "whatsapp" ? siteConfig.whatsapp : undefined,
       href: link.href,
       icon: <BrandIcon name={link.name} className="size-6" />,
       external: true,

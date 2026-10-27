@@ -6,6 +6,8 @@ export const siteConfig = {
   name: "Ferreol",
   tagline: "Fast sites. Smart apps. Zero headaches.",
   email: "cacaderyan32@gmail.com",
+  // WhatsApp only (no calls), written the way visitors should read it. Shown at the bottom of every page.
+  whatsapp: "+225 01 71 22 82 58",
   description:
     "Ferreol is a full-stack developer building fast websites, web apps and mobile apps for businesses and entrepreneurs worldwide. Clear communication, fixed prices, support after delivery.",
   // [PLACEHOLDER] Your live website address, used for sitemap and social previews.
