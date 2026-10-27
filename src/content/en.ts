@@ -298,6 +298,8 @@ export const en = {
   footer: {
     emailLabel: "Email",
     whatsappLabel: "WhatsApp",
+    // Link text under "WhatsApp" (your number itself is not shown).
+    whatsappLink: "Send me a message",
     rights: "All rights reserved.",
     navLabel: "Footer",
     backToTop: "Back to top",

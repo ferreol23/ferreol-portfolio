@@ -60,7 +60,7 @@ export function SiteFooter() {
               className="mt-1 inline-flex items-center gap-2 text-lg font-semibold transition-colors hover:text-accent-strong"
             >
               <BrandIcon name="whatsapp" className="size-5" />
-              {siteConfig.whatsapp}
+              {en.footer.whatsappLink}
               <span className="sr-only">{en.common.opensInNewTab}</span>
             </a>
           </div>
