@@ -1,13 +1,16 @@
 import { AppWindow, ArrowUpRight, Globe, Smartphone, Wrench } from "lucide-react";
 import Link from "next/link";
 import { en } from "@/content/en";
+import type { ProjectType } from "@/lib/validation";
 
 // One icon per service, in the same order as en.services.items.
 const icons = [Globe, AppWindow, Smartphone, Wrench];
+// The project type pre-selected on the contact page for each service (same order).
+const types: ProjectType[] = ["website", "webapp", "mobile", "fix"];
 
 /**
- * Services as a full-width editorial list. Each row links to the contact page;
- * an orange band sweeps across it on hover or keyboard focus.
+ * Services as a full-width editorial list. Each row links to the contact page with
+ * that service already selected; an orange band sweeps across it on hover or keyboard focus.
  */
 export function Services() {
   return (
@@ -27,7 +30,7 @@ export function Services() {
           return (
             <li key={service.title} data-reveal className="border-b border-line">
               <Link
-                href="/contact"
+                href={types[index] ? `/contact?type=${types[index]}` : "/contact"}
                 className="sweep group block transition-colors duration-300 hover:text-on-accent focus-visible:text-on-accent focus-visible:outline-on-accent focus-visible:-outline-offset-4"
               >
                 <span className="sr-only">{en.services.ask} </span>
