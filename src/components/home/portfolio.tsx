@@ -1,5 +1,6 @@
-import { ArrowUpRight, ImageIcon } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ImageIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { projects, type Project } from "@/config/projects";
 import { en } from "@/content/en";
@@ -99,6 +100,12 @@ function displayAddress(link: string): string {
 /** One project row; even rows show the image on the left, odd rows on the right. */
 function ProjectRow({ project, index }: { project: Project; index: number }) {
   const flip = index % 2 === 1;
+  // Mini case study: only the lines that are filled in.
+  const caseStudy = [
+    { label: en.portfolio.problem, text: project.problem },
+    { label: en.portfolio.built, text: project.built },
+    { label: en.portfolio.result, text: project.result },
+  ].filter((line) => line.text);
 
   return (
     <li className="group grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
@@ -129,6 +136,16 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
       <div data-reveal className={`lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
         <h3 className="display text-[clamp(2.25rem,4vw,3.5rem)]">{project.title}</h3>
         <p className="mt-4 text-lg text-muted">{project.description}</p>
+        {caseStudy.length > 0 && (
+          <dl className="mt-6 space-y-3 border-l-2 border-accent-strong pl-4">
+            {caseStudy.map((line) => (
+              <div key={line.label}>
+                <dt className="text-sm font-semibold text-text">{line.label}</dt>
+                <dd className="text-muted">{line.text}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
         <ul className="mt-6 flex flex-wrap gap-2">
           {project.tags.map((tag, tagIndex) => (
             <li key={`${tag}-${tagIndex}`} className="rounded-full border border-line px-3 py-1 text-sm text-muted">
@@ -136,20 +153,33 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             </li>
           ))}
         </ul>
-        {project.link && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex min-h-11 items-center gap-2 border-b-2 border-accent-strong font-semibold text-accent-strong transition-colors hover:text-text"
+        <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 border-b-2 border-accent-strong font-semibold text-accent-strong transition-colors hover:text-text"
+            >
+              {en.portfolio.viewProject}
+              <ArrowUpRight className="size-5" aria-hidden="true" />
+              <span className="sr-only">
+                : {project.title} {en.common.opensInNewTab}
+              </span>
+            </a>
+          )}
+          <Link
+            href={`/contact?project=${encodeURIComponent(project.title)}`}
+            className="group/similar inline-flex min-h-11 items-center gap-2 font-semibold transition-colors hover:text-accent-strong"
           >
-            {en.portfolio.viewProject}
-            <ArrowUpRight className="size-5" aria-hidden="true" />
-            <span className="sr-only">
-              : {project.title} {en.common.opensInNewTab}
-            </span>
-          </a>
-        )}
+            {en.portfolio.similar}
+            <ArrowRight
+              className="size-5 transition-transform duration-300 group-hover/similar:translate-x-1"
+              aria-hidden="true"
+            />
+            <span className="sr-only">: {project.title}</span>
+          </Link>
+        </div>
       </div>
     </li>
   );

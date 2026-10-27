@@ -169,6 +169,12 @@ export const en = {
     heading: "Selected work",
     intro: "A few projects I've built.",
     viewProject: "View project",
+    // Labels of the mini case study under each project.
+    problem: "The problem",
+    built: "What I built",
+    result: "The result",
+    // Opens the contact form with "I'd like something similar to <project>" already written.
+    similar: "I want something similar",
     screenshotPlaceholder: "[PROJECT SCREENSHOT]",
   },
   cta: {
