@@ -209,10 +209,32 @@ export const en = {
     directHeading: "Reach me directly",
     emailLabel: "Email",
     formHeading: "Send a message",
+    // Optional choices above the form. Keep the keys on the left; they're used in links (e.g. /contact?type=mobile).
+    projectTypeLegend: "What do you need?",
+    projectTypes: {
+      website: "Business website",
+      webapp: "Web application",
+      mobile: "Mobile app",
+      fix: "Bug fixing",
+      unsure: "Not sure yet",
+    },
+    timelineLegend: "When do you need it?",
+    timelines: {
+      urgent: "As soon as possible",
+      month: "Within a month",
+      quarter: "In 2–3 months",
+      flexible: "Flexible",
+    },
+    optional: "optional",
+    // Added at the top of the message you receive, e.g. "Project: Mobile app · Timeline: Within a month".
+    projectLine: "Project",
+    timelineLine: "Timeline",
+    // Pre-filled message when a visitor clicks "I want something similar" on a project.
+    similarMessage: "Hi {name}, I'd like something similar to {project}. ",
     nameLabel: "Your name",
     emailFieldLabel: "Your email",
     messageLabel: "Your message",
-    messageHint: "What do you need, and by when?",
+    messageHint: "A few words about your project: what it's for, and any site you like.",
     submit: "Send message",
     submitting: "Sending…",
     success: "Thanks! Your message has been sent. I'll get back to you soon.",

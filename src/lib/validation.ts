@@ -13,11 +13,34 @@ export const LIMITS = {
   messageName: 100,
   messageEmail: 200,
   messageBody: 2000,
+  // What the visitor can type: leaves room for the "Project: … · Timeline: …" line added on top.
+  messageText: 1880,
   visitPage: 200,
 } as const;
 
 const e = en.forms.errors;
 const max = (text: string, value: number) => fill(text, { max: String(value) });
+
+const t = en.contactPage;
+export type ProjectType = keyof typeof t.projectTypes;
+export type Timeline = keyof typeof t.timelines;
+export const PROJECT_TYPES = Object.keys(t.projectTypes) as ProjectType[];
+export const TIMELINES = Object.keys(t.timelines) as Timeline[];
+
+/** The optional "What do you need?" / "When?" choices of the contact form. */
+export const projectChoiceSchema = z.object({
+  projectType: z.enum(PROJECT_TYPES).optional(),
+  timeline: z.enum(TIMELINES).optional(),
+});
+
+/** Puts the chosen project type and timeline on a first line, above the visitor's message. */
+export function composeMessage(message: string, choice: z.infer<typeof projectChoiceSchema>): string {
+  const parts = [
+    choice.projectType && `${t.projectLine}: ${t.projectTypes[choice.projectType]}`,
+    choice.timeline && `${t.timelineLine}: ${t.timelines[choice.timeline]}`,
+  ].filter(Boolean);
+  return parts.length ? `${parts.join(" · ")}\n\n${message}` : message;
+}
 
 export const reviewSchema = z.object({
   name: z.string().trim().min(1, e.nameRequired).max(LIMITS.reviewName, max(e.nameTooLong, LIMITS.reviewName)),
@@ -41,7 +64,7 @@ export const messageSchema = z.object({
     .string()
     .trim()
     .min(1, e.messageRequired)
-    .max(LIMITS.messageBody, max(e.messageTooLong, LIMITS.messageBody)),
+    .max(LIMITS.messageText, max(e.messageTooLong, LIMITS.messageText)),
 });
 
 export const visitSchema = z.object({

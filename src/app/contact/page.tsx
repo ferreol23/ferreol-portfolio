@@ -1,8 +1,9 @@
 import { ArrowUpRight, Mail } from "lucide-react";
 import type { Metadata } from "next";
-import type { CSSProperties, ReactNode } from "react";
+import { Suspense, type CSSProperties, type ReactNode } from "react";
 import { BrandIcon } from "@/components/brand-icon";
 import { ContactForm } from "@/components/contact/contact-form";
+import { ContactFormFromUrl } from "@/components/contact/contact-form-from-url";
 import { RevealScope } from "@/components/reveal-scope";
 import { socialLinks } from "@/config/links";
 import { siteConfig } from "@/config/site";
@@ -86,7 +87,10 @@ export default function ContactPage() {
             <h2 id="contact-form-heading" className="display mb-8 text-[clamp(2.25rem,4vw,3.25rem)]">
               {t.formHeading}
             </h2>
-            <ContactForm />
+            {/* The plain form is in the page HTML; once loaded, it is swapped for the one pre-filled from the link. */}
+            <Suspense fallback={<ContactForm />}>
+              <ContactFormFromUrl />
+            </Suspense>
           </div>
         </section>
       </div>

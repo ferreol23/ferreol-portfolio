@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
+import { ChoiceGroup } from "@/components/contact/choice-group";
 import { Field } from "@/components/forms/field";
 import { FormStatus } from "@/components/forms/form-status";
 import { HONEYPOT_NAME, Honeypot } from "@/components/forms/honeypot";
@@ -8,15 +9,31 @@ import { SubmitButton } from "@/components/forms/submit-button";
 import { useCooldown } from "@/components/forms/use-cooldown";
 import { en, fill } from "@/content/en";
 import { getSupabase } from "@/lib/supabase";
-import { LIMITS, fieldErrors, messageSchema } from "@/lib/validation";
+import {
+  LIMITS,
+  composeMessage,
+  fieldErrors,
+  messageSchema,
+  projectChoiceSchema,
+  type ProjectType,
+  type Timeline,
+} from "@/lib/validation";
 
 type Status = { kind: "success" | "error"; message: string } | null;
 
 const empty = { name: "", email: "", message: "" };
 
-/** Contact form. Messages are saved in Supabase (table "messages"), where only you can read them. */
-export function ContactForm() {
-  const [values, setValues] = useState(empty);
+/** Pre-filled values, e.g. from a link like /contact?type=mobile. */
+export type ContactPrefill = { projectType?: ProjectType; message?: string };
+
+/**
+ * Contact form. Messages are saved in Supabase (table "messages"), where only you can read them.
+ * The optional project type and timeline are added on top of the message.
+ */
+export function ContactForm({ prefill }: { prefill?: ContactPrefill }) {
+  const [values, setValues] = useState({ ...empty, message: prefill?.message ?? "" });
+  const [projectType, setProjectType] = useState<ProjectType | undefined>(prefill?.projectType);
+  const [timeline, setTimeline] = useState<Timeline | undefined>();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState<Status>(null);
@@ -60,13 +77,19 @@ export function ContactForm() {
       return;
     }
 
+    // Only accept choices from the lists (the page could be tampered with).
+    const choice = projectChoiceSchema.safeParse({ projectType, timeline });
+    const row = { ...parsed.data, message: composeMessage(parsed.data.message, choice.success ? choice.data : {}) };
+
     setErrors({});
     setBusy(true);
     try {
       // Never chain .select() here: visitors can't read messages back.
-      const { error } = await getSupabase().from("messages").insert(parsed.data);
+      const { error } = await getSupabase().from("messages").insert(row);
       if (error) throw error;
       setValues(empty);
+      setProjectType(undefined);
+      setTimeline(undefined);
       cooldown.start();
       announce({ kind: "success", message: t.success });
     } catch {
@@ -78,6 +101,20 @@ export function ContactForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit} className="relative space-y-6">
+      <ChoiceGroup
+        name="projectType"
+        legend={t.projectTypeLegend}
+        options={t.projectTypes}
+        value={projectType}
+        onChange={setProjectType}
+      />
+      <ChoiceGroup
+        name="timeline"
+        legend={t.timelineLegend}
+        options={t.timelines}
+        value={timeline}
+        onChange={setTimeline}
+      />
       <div className="grid gap-6 sm:grid-cols-2">
         <Field
           id="contact-name"
@@ -109,7 +146,7 @@ export function ContactForm() {
         value={values.message}
         onChange={set("message")}
         error={errors.message}
-        maxLength={LIMITS.messageBody}
+        maxLength={LIMITS.messageText}
         showCounter
         multiline
       />
