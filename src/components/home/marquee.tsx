@@ -38,7 +38,11 @@ export function Marquee() {
 
       const onScroll = contextSafe((self: ScrollTrigger) => {
         const velocity = self.getVelocity(); // pixels per second
-        gsap.to(loop, { timeScale: gsap.utils.clamp(1, 6, 1 + Math.abs(velocity) / 300), duration: 0.2, overwrite: true });
+        gsap.to(loop, {
+          timeScale: gsap.utils.clamp(1, 6, 1 + Math.abs(velocity) / 300),
+          duration: 0.2,
+          overwrite: true,
+        });
         skewTo(gsap.utils.clamp(-6, 6, -velocity / 200));
         settle?.kill();
         settle = gsap.delayedCall(0.2, () => {

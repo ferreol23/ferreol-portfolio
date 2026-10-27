@@ -106,7 +106,10 @@ export function Hero() {
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 mix-blend-color"
-              style={{ background: "linear-gradient(250deg, color-mix(in oklab, var(--accent) 55%, transparent), transparent 55%)" }}
+              style={{
+                background:
+                  "linear-gradient(250deg, color-mix(in oklab, var(--accent) 55%, transparent), transparent 55%)",
+              }}
             />
             {/* Fades the bottom of the photo into the page */}
             <div

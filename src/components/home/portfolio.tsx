@@ -1,8 +1,7 @@
-import { ArrowRight, ArrowUpRight, ImageIcon } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { BrandIcon } from "@/components/brand-icon";
+import { ProjectPreview } from "@/components/project-preview";
 import { WHATSAPP_URL, isPlaceholder, whatsappLink } from "@/config/links";
 import { projects, type Project } from "@/config/projects";
 import { siteConfig } from "@/config/site";
@@ -16,7 +15,7 @@ import { WorkShrink } from "./work-shrink";
  */
 export function Portfolio() {
   return (
-    <section id="work" aria-labelledby="work-heading" className="scroll-mt-24 pb-24 sm:pb-32">
+    <section id="work" aria-labelledby="work-heading" className="pb-24 sm:pb-32">
       <WorkShrink media={<BannerBackground />}>
         <div className="shell flex min-h-[80svh] flex-col justify-end gap-6 py-16 sm:py-24 lg:flex-row lg:items-end lg:justify-between">
           <div data-shrink-left>
@@ -66,40 +65,6 @@ function BannerBackground() {
   );
 }
 
-/**
- * A screenshot inside a simple browser window (three dots + the site's address), like a real visit.
- * The screenshot is shown whole (16:10, from the top), never cropped on the sides.
- */
-function BrowserWindow({ address, children }: { address: string; children: ReactNode }) {
-  return (
-    <div className="overflow-hidden rounded-[1.5rem] border border-line bg-surface shadow-2xl shadow-black/20 transition-transform duration-500 group-hover:-translate-y-1.5">
-      <div aria-hidden="true" className="flex items-center gap-3 border-b border-line px-4 py-3">
-        <span className="flex w-12 shrink-0 gap-1.5">
-          <span className="size-2.5 rounded-full bg-accent" />
-          <span className="size-2.5 rounded-full bg-muted/40" />
-          <span className="size-2.5 rounded-full bg-muted/40" />
-        </span>
-        <span className="min-w-0 flex-1 truncate rounded-full bg-bg px-3 py-1 text-center text-xs text-muted">
-          {displayAddress(address)}
-        </span>
-        <span className="w-12 shrink-0" />
-      </div>
-      <div className="relative aspect-[16/10]">{children}</div>
-    </div>
-  );
-}
-
-/** "https://www.shop.com/en" → "shop.com/en". Empty while the project has no link yet. */
-function displayAddress(link: string): string {
-  if (!link) return "";
-  try {
-    const url = new URL(link);
-    return (url.hostname.replace(/^www\./, "") + url.pathname).replace(/\/$/, "");
-  } catch {
-    return "";
-  }
-}
-
 /** One project row; even rows show the image on the left, odd rows on the right. */
 function ProjectRow({ project, index }: { project: Project; index: number }) {
   const flip = index % 2 === 1;
@@ -111,29 +76,13 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
   ].filter((line) => line.text);
 
   return (
-    <li className="group grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
+    <li id={`project-${index + 1}`} className="group grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
       <div data-reveal className={`lg:col-span-7 ${flip ? "lg:order-2" : ""}`}>
-        <BrowserWindow address={project.link}>
-          {project.image ? (
-            <Image
-              src={project.image}
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 45rem, 100vw"
-              className="object-cover object-top"
-            />
-          ) : (
-            <div
-              className="absolute inset-0 grid place-items-center text-muted"
-              style={{ background: "radial-gradient(70% 90% at 100% 0%, var(--glow), transparent 60%)" }}
-            >
-              <span className="flex flex-col items-center gap-2 text-sm">
-                <ImageIcon className="size-8" aria-hidden="true" />
-                {en.portfolio.screenshotPlaceholder}
-              </span>
-            </div>
-          )}
-        </BrowserWindow>
+        <ProjectPreview
+          project={project}
+          sizes="(min-width: 1024px) 45rem, 100vw"
+          className="transition-transform duration-500 group-hover:-translate-y-1.5"
+        />
       </div>
 
       <div data-reveal className={`lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>

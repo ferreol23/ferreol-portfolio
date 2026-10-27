@@ -23,7 +23,10 @@ export function FiverrCta() {
                 <ArrowUpRight className="size-5" aria-hidden="true" />
               </ButtonLink>
             </Magnetic>
-            <Link href="/contact" className="inline-flex min-h-11 items-center font-semibold underline decoration-2 underline-offset-4">
+            <Link
+              href="/contact"
+              className="inline-flex min-h-11 items-center font-semibold underline decoration-2 underline-offset-4"
+            >
               {en.cta.sendMessage}
             </Link>
           </div>

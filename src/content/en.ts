@@ -165,6 +165,12 @@ export const en = {
       },
     ],
   },
+  featured: {
+    // Small section right under the hero, with your first three projects.
+    label: "Recent work",
+    heading: "See what I build",
+    seeAll: "See all projects",
+  },
   portfolio: {
     heading: "Selected work",
     intro: "A few projects I've built.",
