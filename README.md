@@ -3,6 +3,8 @@
 Site portfolio de Ferreol, développeur full-stack freelance.
 **Fast sites. Smart apps. Zero headaches.**
 
+**En ligne : https://ferreol23.github.io/ferreol-portfolio/**
+
 Pages : Accueil, Avis (`/reviews`), Contact (`/contact`), plus une page 404.
 
 ## Technologies
@@ -33,8 +35,21 @@ Pages : Accueil, Avis (`/reviews`), Contact (`/contact`), plus une page 404.
 
    Puis ouvrir http://localhost:3000.
 
-Autres commandes : `npm run lint` (vérifie le code), `npm run build` (prépare la version en ligne),
-`npm run start` (lance cette version).
+Autres commandes : `npm run lint` (vérifie le code), `npm run build` (prépare la version en ligne
+dans le dossier `out/`), `npm run preview` (affiche cette version sur http://localhost:3005/ferreol-portfolio/,
+comme sur GitHub Pages).
+
+## Mettre en ligne
+
+Le site est publié sur **GitHub Pages** : https://ferreol23.github.io/ferreol-portfolio/
+
+- **Chaque `git push` sur `main` met le site à jour tout seul** (en 2 à 3 minutes).
+  Le suivi est dans l'onglet **Actions** du dépôt GitHub ; le fichier est `.github/workflows/deploy.yml`.
+- GitHub Pages ne sert que des fichiers : `npm run build` fabrique tout le site en HTML/CSS/JS dans `out/`.
+  Les avis sont donc chargés dans le navigateur du visiteur, directement depuis Supabase.
+- L'adresse et la clé Supabase sont enregistrées dans le dépôt GitHub → **Settings → Secrets and
+  variables → Actions** (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`).
+- Si tu renommes le dépôt, change aussi `BASE_PATH` dans `next.config.ts` et `url` dans `src/config/site.ts`.
 
 ## Où modifier quoi
 
@@ -49,7 +64,7 @@ Autres commandes : `npm run lint` (vérifie le code), `npm run build` (prépare 
 | L'icône d'onglet « F » | `src/app/icon.svg` et `src/app/apple-icon.png` (180 × 180) |
 | L'image de partage (WhatsApp, LinkedIn…) | `src/app/opengraph-image.png` (1200 × 630) et son texte `opengraph-image.alt.txt` |
 | Les pages listées pour Google | `src/app/sitemap.ts` |
-| Les en-têtes de sécurité | `next.config.ts` |
+| Les règles de sécurité (Content-Security-Policy) | `src/lib/security.ts` |
 
 Tout ce qui contient encore `[PLACEHOLDER]` ou `[ENTRE CROCHETS]` reste à remplir.
 Les liens sociaux non remplis sont masqués automatiquement.
@@ -73,22 +88,22 @@ deux envois.
 
 ### Infos à recevoir de Ferreol
 
-- [ ] Lien **Fiverr** → `FIVERR_URL` dans `src/config/links.ts`
+- [x] Lien **Fiverr** → `FIVERR_URL` dans `src/config/links.ts`
 - [x] Numéro **WhatsApp** → `whatsapp` dans `src/config/site.ts` (le numéro n'est pas affiché : il sert seulement aux liens « Send me a message »)
-- [ ] **Projets** + **captures d'écran** → `src/config/projects.ts` (captures dans `public/projects/`, idéalement 1600×1000)
-- [ ] **Vraie photo** (l'actuelle est générée par IA) → `photo` dans `src/config/site.ts`
-- [ ] **Délai habituel** pour un site → question « How long does it take? » dans `src/content/en.ts`
-- [ ] **Nom de domaine** → `url` dans `src/config/site.ts` (sinon sitemap et partages pointent vers example.com)
+- [x] **Projets** + **captures d'écran** → `src/config/projects.ts` (captures dans `public/projects/`, idéalement 1600×1000)
+- [ ] **Vraie photo** → `photo` dans `src/config/site.ts` (en attendant, le hero affiche l'initiale « F. »)
+- [ ] **Délai habituel de livraison** (optionnel) → question « How long does it take? » dans `src/content/en.ts`
+- [x] **Adresse du site** → `url` dans `src/config/site.ts` (GitHub Pages ; à changer si tu prends un nom de domaine)
 - [ ] Logo « F » définitif (optionnel) → remplace `src/app/icon.svg` et `src/app/apple-icon.png`
 
 ### Vérifications techniques
 
-- [ ] Plus aucun `[PLACEHOLDER]` visible sur le site
-- [ ] `npm run lint` et `npm run build` passent sans erreur
-- [ ] Variables `NEXT_PUBLIC_SUPABASE_URL` et `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` ajoutées chez l'hébergeur
+- [x] Plus aucun `[PLACEHOLDER]` visible sur le site
+- [x] `npm run lint` et `npm run build` passent sans erreur
+- [x] Variables `NEXT_PUBLIC_SUPABASE_URL` et `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` ajoutées dans les secrets GitHub
 - [ ] Test en ligne : envoyer un avis, un message, accepter la bannière, puis vérifier dans Supabase
 - [ ] Aperçu de partage vérifié (coller l'adresse du site dans WhatsApp ou LinkedIn)
-- [ ] `https://ton-domaine/sitemap.xml` et `/robots.txt` s'affichent
+- [ ] `https://ferreol23.github.io/ferreol-portfolio/sitemap.xml` s'affiche
 - [ ] Site ajouté à Google Search Console avec le sitemap
 - [ ] Test sur téléphone, en thème clair et sombre, et avec « réduire les animations »
 
