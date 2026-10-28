@@ -19,8 +19,9 @@ export const siteConfig = {
 
   // Your photo: put the file in the /public folder (e.g. public/me.jpg)
   // and write its path here, e.g. "/me.jpg". Leave "" to show a placeholder.
-  // [BEFORE LAUNCH] This one is AI-generated: replace it with a real photo of you.
-  photo: "/images/ferreol.webp",
+  // Hidden for now (the old one was AI-generated): the hero shows your initial instead.
+  // Put a real photo in /public/images/ and write its path here, e.g. "/images/ferreol.jpg".
+  photo: "",
 
   // true shows "Available for new projects" under the hero buttons. Set to false when you're fully booked.
   available: true,

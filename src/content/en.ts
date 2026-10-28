@@ -37,7 +37,6 @@ export const en = {
     hireOnFiverr: "Hire me on Fiverr",
     contactMe: "Contact me",
     photoAlt: "Portrait of {name}",
-    photoPlaceholder: "[YOUR PHOTO]",
     // Text that circles around the rotating badge next to the photo.
     badge: "Web & app developer • Freelance • Let's build • ",
   },
@@ -96,7 +95,7 @@ export const en = {
       {
         question: "How long does it take?",
         answer:
-          "[YOUR TIMEFRAME] A simple business website usually takes [X] to [Y] weeks. Web and mobile apps take longer. You get a timeline together with the proposal.",
+          "It depends on the size of the project. After a short brief, you get a clear timeline together with the proposal, before any work starts. And during the project, I usually reply within 1–2 hours.",
       },
       {
         question: "Can you fix or improve my existing website?",

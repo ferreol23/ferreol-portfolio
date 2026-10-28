@@ -1,4 +1,4 @@
-import { ArrowUpRight, Asterisk, UserRound } from "lucide-react";
+import { ArrowUpRight, Asterisk } from "lucide-react";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { ButtonLink } from "@/components/button-link";
@@ -74,7 +74,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Portrait: black-and-white photo lit by a warm orange rim light */}
+        {/* Portrait: black-and-white photo lit by a warm orange rim light (or your initial, until you add a photo) */}
         <div className="rise relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none" style={delay(240)}>
           <figure className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-surface">
             {siteConfig.photo ? (
@@ -87,11 +87,12 @@ export function Hero() {
                 className="object-cover object-top grayscale contrast-125 brightness-[0.8]"
               />
             ) : (
-              <div className="grid h-full place-items-center text-muted">
-                <div className="flex flex-col items-center gap-3">
-                  <UserRound className="size-24 opacity-60" strokeWidth={1} aria-hidden="true" />
-                  <span className="text-sm">{en.hero.photoPlaceholder}</span>
-                </div>
+              // No photo yet: a big initial lit by the same orange light (decoration).
+              <div aria-hidden="true" className="grid h-full place-items-center pb-16">
+                <span className="display select-none text-[clamp(12rem,32vw,24rem)] leading-none text-surface-2">
+                  {name.charAt(0)}
+                  <span className="text-accent">.</span>
+                </span>
               </div>
             )}
 
