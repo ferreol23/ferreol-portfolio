@@ -7,7 +7,9 @@ import { MotionProvider } from "@/components/motion-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { en } from "@/content/en";
+import { withBasePath } from "@/lib/base-path";
 import { rootMetadata } from "@/lib/metadata";
+import { contentSecurityPolicy } from "@/lib/security";
 import "./globals.css";
 
 // Headlines: characterful grotesque (its width axis gives the condensed poster look).
@@ -37,8 +39,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${bricolage.variable} ${atkinson.variable} h-full antialiased`}
     >
+      <head>
+        {/* First in <head> so it applies to everything after it (GitHub Pages can't send it as a header). */}
+        <meta httpEquiv="Content-Security-Policy" content={contentSecurityPolicy} />
+      </head>
       <body className="flex min-h-full flex-col">
-        <Script src="/theme-init.js" strategy="beforeInteractive" />
+        <Script src={withBasePath("/theme-init.js")} strategy="beforeInteractive" />
         <MotionProvider />
         <a
           href="#content"

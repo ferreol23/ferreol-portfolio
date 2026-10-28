@@ -1,5 +1,7 @@
+"use client";
+
 import { CircleAlert, MessageSquareQuote } from "lucide-react";
-import { connection } from "next/server";
+import { useEffect, useState } from "react";
 import { en } from "@/content/en";
 import { getSupabase } from "@/lib/supabase";
 import { StarRating } from "./star-rating";
@@ -7,27 +9,41 @@ import { StarRating } from "./star-rating";
 const dateFormat = new Intl.DateTimeFormat("en-US", { dateStyle: "medium", timeZone: "UTC" });
 
 type PublicReview = { id: string; name: string; rating: number; comment: string; created_at: string };
+type State = { status: "loading" } | { status: "error" } | { status: "ready"; reviews: PublicReview[] };
 
 /**
- * Approved reviews, loaded fresh from Supabase on every visit (so a review you
- * approve shows up right away). Shown inside <Suspense>, which displays the
- * loading state below while this runs.
+ * Approved reviews, loaded fresh from Supabase in the visitor's browser (the site is
+ * plain files on GitHub Pages, so a review you approve shows up on the next visit).
+ * Shows the loading placeholder below until they arrive.
  */
-export async function ReviewsList() {
-  await connection();
+export function ReviewsList() {
+  const [state, setState] = useState<State>({ status: "loading" });
   const t = en.reviewsPage;
 
-  let reviews: PublicReview[];
-  try {
-    const { data, error } = await getSupabase()
-      .from("reviews")
-      .select("id, name, rating, comment, created_at")
-      .eq("approved", true)
-      .order("created_at", { ascending: false })
-      .limit(50);
-    if (error) throw error;
-    reviews = data ?? [];
-  } catch {
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data, error } = await getSupabase()
+          .from("reviews")
+          .select("id, name, rating, comment, created_at")
+          .eq("approved", true)
+          .order("created_at", { ascending: false })
+          .limit(50);
+        if (error) throw error;
+        if (!cancelled) setState({ status: "ready", reviews: data ?? [] });
+      } catch {
+        if (!cancelled) setState({ status: "error" });
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (state.status === "loading") return <ReviewsSkeleton />;
+
+  if (state.status === "error") {
     return (
       <div role="alert" className="flex items-start gap-4 border-t border-line pt-8">
         <CircleAlert className="mt-1 size-6 shrink-0 text-danger" aria-hidden="true" />
@@ -39,6 +55,7 @@ export async function ReviewsList() {
     );
   }
 
+  const reviews = state.reviews;
   if (reviews.length === 0) {
     return (
       <div className="flex items-start gap-4 border-t border-line pt-8">
@@ -73,7 +90,7 @@ export async function ReviewsList() {
 }
 
 /** Placeholder shown while the reviews load. */
-export function ReviewsSkeleton() {
+function ReviewsSkeleton() {
   return (
     <div role="status" className="space-y-0">
       <span className="sr-only">{en.reviewsPage.loading}</span>

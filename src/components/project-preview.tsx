@@ -2,6 +2,7 @@ import { ImageIcon } from "lucide-react";
 import Image from "next/image";
 import type { Project } from "@/config/projects";
 import { en } from "@/content/en";
+import { withBasePath } from "@/lib/base-path";
 
 /**
  * A project's screenshot inside a simple browser window (three dots + the site's address),
@@ -47,7 +48,7 @@ export function ProjectPreview({
       </div>
       <div className="relative aspect-[16/10]">
         {cover ? (
-          <Image src={cover.src} alt="" fill sizes={sizes} className="object-cover object-top" />
+          <Image src={withBasePath(cover.src)} alt="" fill sizes={sizes} className="object-cover object-top" />
         ) : (
           <div
             className="absolute inset-0 grid place-items-center text-muted"

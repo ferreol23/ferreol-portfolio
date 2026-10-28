@@ -20,6 +20,7 @@ import { WHATSAPP_URL, isPlaceholder, whatsappLink } from "@/config/links";
 import type { Project } from "@/config/projects";
 import { siteConfig } from "@/config/site";
 import { en, fill } from "@/content/en";
+import { withBasePath } from "@/lib/base-path";
 import { detailsId } from "./open-details-button";
 
 const t = en.portfolio;
@@ -78,7 +79,7 @@ export function ProjectDetails({ project }: { project: Project }) {
                 <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-line bg-surface">
                   <Image
                     key={image.src}
-                    src={image.src}
+                    src={withBasePath(image.src)}
                     alt={image.alt}
                     fill
                     sizes="(min-width: 1152px) 40rem, (min-width: 1024px) 55vw, 100vw"
@@ -136,7 +137,7 @@ export function ProjectDetails({ project }: { project: Project }) {
                       }`}
                     >
                       <Image
-                        src={thumb.src}
+                        src={withBasePath(thumb.src)}
                         alt=""
                         fill
                         sizes="8rem"

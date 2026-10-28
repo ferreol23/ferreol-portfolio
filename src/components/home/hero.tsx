@@ -7,6 +7,7 @@ import { SocialLinks } from "@/components/social-links";
 import { FIVERR_URL } from "@/config/links";
 import { siteConfig } from "@/config/site";
 import { en, fill } from "@/content/en";
+import { withBasePath } from "@/lib/base-path";
 
 /** Stagger helper for the page-load animation (pure CSS, so it works before JavaScript loads). */
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as CSSProperties;
@@ -79,7 +80,7 @@ export function Hero() {
           <figure className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-surface">
             {siteConfig.photo ? (
               <Image
-                src={siteConfig.photo}
+                src={withBasePath(siteConfig.photo)}
                 alt={fill(en.hero.photoAlt, { name })}
                 fill
                 priority

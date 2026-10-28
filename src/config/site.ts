@@ -10,9 +10,9 @@ export const siteConfig = {
   whatsapp: "+225 01 71 22 82 58",
   description:
     "Ferreol is a full-stack developer building fast websites, web apps and mobile apps for businesses and entrepreneurs worldwide. Clear communication, fixed prices, support after delivery.",
-  // [PLACEHOLDER] Your live website address, used for sitemap and social previews.
+  // Your live website address, used for sitemap and social previews.
   // Must be a full URL starting with https:// (no trailing slash).
-  url: "https://example.com",
+  url: "https://ferreol23.github.io/ferreol-portfolio",
 
   // Shown in the "About me" section.
   location: "California, United States",

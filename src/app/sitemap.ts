@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 
+// Written once at build time as a plain file (the site is a static export for GitHub Pages).
+export const dynamic = "force-static";
+
 /*
   The list of pages for search engines (served at /sitemap.xml).
   Add a line here when you create a new page.

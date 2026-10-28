@@ -4,14 +4,20 @@
     {
       "name": "dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000
     },
     {
       "name": "prod-preview",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["next", "start", "-p", "3005"],
-      "port": 3005
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/serve-export.mjs"
+      ],
+      "port": 3005,
+      "url": "http://localhost:3005"
     }
   ]
 }

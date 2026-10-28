@@ -46,8 +46,8 @@ Autres commandes : `npm run lint` (vérifie le code), `npm run build` (prépare 
 | Mes projets (textes, captures, liens) | `src/config/projects.ts` |
 | Tous les textes du site (titres, FAQ, boutons…) | `src/content/en.ts` |
 | La couleur orange | `--accent` dans `src/app/globals.css` |
-| L'icône d'onglet « F » | `src/app/icon.svg` et `src/app/apple-icon.tsx` |
-| L'image de partage (WhatsApp, LinkedIn…) | `src/app/opengraph-image.tsx` |
+| L'icône d'onglet « F » | `src/app/icon.svg` et `src/app/apple-icon.png` (180 × 180) |
+| L'image de partage (WhatsApp, LinkedIn…) | `src/app/opengraph-image.png` (1200 × 630) et son texte `opengraph-image.alt.txt` |
 | Les pages listées pour Google | `src/app/sitemap.ts` |
 | Les en-têtes de sécurité | `next.config.ts` |
 
@@ -79,7 +79,7 @@ deux envois.
 - [ ] **Vraie photo** (l'actuelle est générée par IA) → `photo` dans `src/config/site.ts`
 - [ ] **Délai habituel** pour un site → question « How long does it take? » dans `src/content/en.ts`
 - [ ] **Nom de domaine** → `url` dans `src/config/site.ts` (sinon sitemap et partages pointent vers example.com)
-- [ ] Logo « F » définitif (optionnel) → remplace `src/app/icon.svg` et `src/app/apple-icon.tsx`
+- [ ] Logo « F » définitif (optionnel) → remplace `src/app/icon.svg` et `src/app/apple-icon.png`
 
 ### Vérifications techniques
 

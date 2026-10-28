@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
-import { Suspense } from "react";
 import { RevealScope } from "@/components/reveal-scope";
 import { ReviewForm } from "@/components/reviews/review-form";
-import { ReviewsList, ReviewsSkeleton } from "@/components/reviews/reviews-list";
+import { ReviewsList } from "@/components/reviews/reviews-list";
 import { siteConfig } from "@/config/site";
 import { en, fill } from "@/content/en";
 import { pageMetadata } from "@/lib/metadata";
@@ -36,9 +35,7 @@ export default function ReviewsPage() {
           <h2 id="reviews-list-heading" className="mb-2 text-sm font-normal text-muted">
             {t.listHeading}
           </h2>
-          <Suspense fallback={<ReviewsSkeleton />}>
-            <ReviewsList />
-          </Suspense>
+          <ReviewsList />
         </section>
 
         <section aria-labelledby="review-form-heading" className="lg:col-span-5">

@@ -2,56 +2,31 @@ import path from "node:path";
 import type { NextConfig } from "next";
 
 /*
-  SECURITY HEADERS
-  ----------------
-  Sent with every page. They tell the browser to block common attacks:
-  loading scripts from other sites, showing the site inside another site's
-  frame (clickjacking), guessing file types, leaking full URLs to other sites…
+  PUBLISHING ON GITHUB PAGES
+  --------------------------
+  GitHub Pages only serves files: `next build` writes the whole site as plain
+  HTML/CSS/JS into the `out` folder (static export), and the GitHub Action in
+  .github/workflows/deploy.yml publishes that folder on every push to main.
 
-  If you add a service that loads files from another domain (analytics,
-  a video embed, images from a CDN), add that domain to the matching line of
-  the Content-Security-Policy below, or the browser will block it.
+  - The site lives at https://ferreol23.github.io/ferreol-portfolio/, so every
+    address starts with BASE_PATH (not while you run `npm run dev`).
+  - No image server on GitHub Pages: images are served as they are (they're
+    already small WebP files).
+  - Security rules can't be sent as headers there: see src/lib/security.ts.
 */
 const isDev = process.env.NODE_ENV === "development";
 
-// Forms, reviews and visits talk to your Supabase project.
-const supabaseOrigin = process.env.NEXT_PUBLIC_SUPABASE_URL
-  ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).origin
-  : "https://*.supabase.co";
-
-const contentSecurityPolicy = [
-  "default-src 'self'",
-  // 'unsafe-inline': Next.js puts small inline scripts in static pages. 'unsafe-eval' is only for dev tools.
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' blob: data:",
-  "font-src 'self'",
-  `connect-src 'self' ${supabaseOrigin}`,
-  "object-src 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-  "frame-ancestors 'none'",
-].join("; ");
-
-const securityHeaders = [
-  { key: "Content-Security-Policy", value: contentSecurityPolicy },
-  // Only ever load this site over HTTPS (ignored on http://localhost).
-  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-  { key: "X-Content-Type-Options", value: "nosniff" },
-  { key: "X-Frame-Options", value: "DENY" },
-  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
-  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
-];
+// The repository name on GitHub. Change both if you rename the repository.
+const BASE_PATH = isDev ? "" : "/ferreol-portfolio";
 
 const nextConfig: NextConfig = {
-  cacheComponents: true,
-  partialPrefetching: true,
-  // Don't advertise "X-Powered-By: Next.js".
-  poweredByHeader: false,
-  async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
-  },
+  output: "export",
+  basePath: BASE_PATH,
+  // Lets the code add the folder to plain file paths (src/lib/base-path.ts).
+  env: { NEXT_PUBLIC_BASE_PATH: BASE_PATH },
+  images: { unoptimized: true },
+  // No Cache Components / partial prefetching: they need a server, and a static
+  // export is already 100% prebuilt files.
   turbopack: {
     // This folder is the project root (ignores stray package-lock.json files higher up).
     root: path.join(__dirname),
