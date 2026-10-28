@@ -113,7 +113,7 @@ export function FooterWordmark({ name }: { name: string }) {
       {/* Top padding = room for the letters to lift; overflow-hidden hides them below before the entrance. */}
       <p
         data-row
-        className="display flex w-fit touch-pan-y select-none overflow-hidden whitespace-nowrap pt-[0.3em] text-[clamp(4.5rem,21vw,19rem)] leading-[0.78] text-surface-2"
+        className="display flex w-fit touch-pan-y select-none overflow-hidden whitespace-nowrap pt-[0.3em] text-[clamp(4.5rem,21vw,19rem)] leading-[0.78] text-wordmark"
       >
         {letters.map(({ char, accent }, index) => (
           <span key={`${char}-${index}`} data-char className="inline-block">

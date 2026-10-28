@@ -21,6 +21,8 @@
   --line: #2a2826;
   --text: #f5f3f0;
   --text-muted: #a39e97;
+  /* Giant "FERREOL." at the bottom: a faint shadow of the background (decoration) */
+  --wordmark: var(--surface-2);
 
   /* Accent used for text, links and focus rings */
   --accent-strong: var(--accent);
@@ -42,6 +44,8 @@
   --line: #e0dcd5;
   --text: #121110;
   --text-muted: #5a554f;
+  /* surface-2 almost disappears on paper white: a deeper beige, as visible as in dark */
+  --wordmark: #d8d3cb;
 
   /* Darker version of the accent so orange text stays readable on white */
   --accent-strong: color-mix(in oklab, var(--accent), black 32%);
@@ -59,6 +63,7 @@
   --color-line: var(--line);
   --color-text: var(--text);
   --color-muted: var(--text-muted);
+  --color-wordmark: var(--wordmark);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-on-accent: var(--on-accent);
