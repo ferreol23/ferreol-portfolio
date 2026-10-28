@@ -25,3 +25,4 @@ Sur GitHub : page du dépôt → **Tags** (ou **Releases**) → choisir la versi
 | [v0.4.0](v0.4.0.md) | 2026-10-24 | Tes vraies infos + animations GSAP |
 | [v0.5.0](v0.5.0.md) | 2026-10-24 | Consentement + visites, 404, SEO, icône « F », sécurité, README |
 | [v1.0.0](v1.0.0.md) | 2026-10-28 | Première mise en ligne : tes 3 réalisations, fenêtre de détail, WhatsApp, GitHub Pages |
+| [v1.0.1](v1.0.1.md) | 2026-10-28 | Vérification Google Search Console |
