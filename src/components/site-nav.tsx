@@ -1,12 +1,12 @@
 "use client";
 
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { FIVERR_URL } from "@/config/links";
 import { en } from "@/content/en";
 import { Magnetic } from "./magnetic";
+import { NavLink } from "./nav-link";
 import { ThemeToggle } from "./theme-toggle";
 
 const links = [
@@ -36,9 +36,9 @@ export function SiteNav() {
         <ul className="flex items-center gap-8">
           {links.map((link) => (
             <li key={link.href}>
-              <Link href={link.href} aria-current={link.href === pathname ? "page" : undefined} className={linkClass(link.href)}>
+              <NavLink href={link.href} aria-current={link.href === pathname ? "page" : undefined} className={linkClass(link.href)}>
                 {link.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -82,14 +82,14 @@ export function SiteNav() {
           <ul className="flex flex-col">
             {links.map((link) => (
               <li key={link.href}>
-                <Link
+                <NavLink
                   href={link.href}
                   onClick={() => setOpen(false)}
                   aria-current={link.href === pathname ? "page" : undefined}
                   className="block border-b border-line py-4 font-display text-2xl font-bold"
                 >
                   {link.label}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>

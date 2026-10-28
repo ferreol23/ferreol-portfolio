@@ -1,5 +1,4 @@
 import { ArrowUp, Mail } from "lucide-react";
-import Link from "next/link";
 import { whatsappLink } from "@/config/links";
 import { siteConfig } from "@/config/site";
 import { en, fill } from "@/content/en";
@@ -7,6 +6,7 @@ import { BrandIcon } from "./brand-icon";
 import { ConsentSettingsButton } from "./consent/consent-banner";
 import { CurrentYear } from "./current-year";
 import { FooterWordmark } from "./footer-wordmark";
+import { NavLink } from "./nav-link";
 import { SocialLinks } from "./social-links";
 
 const footerLinks = [
@@ -32,9 +32,9 @@ export function SiteFooter() {
           <ul className="grid grid-cols-2 gap-x-6 gap-y-1 md:grid-cols-1">
             {footerLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="inline-block py-1.5 text-muted transition-colors hover:text-text">
+                <NavLink href={link.href} className="inline-block py-1.5 text-muted transition-colors hover:text-text">
                   {link.label}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
