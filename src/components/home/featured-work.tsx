@@ -1,5 +1,6 @@
 import { ArrowDown } from "lucide-react";
 import { ProjectPreview } from "@/components/project-preview";
+import { OpenDetailsButton } from "@/components/projects/open-details-button";
 import { projects } from "@/config/projects";
 import { en } from "@/content/en";
 
@@ -8,7 +9,7 @@ const tilts = ["md:-rotate-2", "md:rotate-1 md:translate-y-6", "md:-rotate-1"];
 
 /**
  * "Recent work", right under the hero: the first three projects as small browser windows,
- * so visitors see real work early. Each card jumps to the full project in "Selected work".
+ * so visitors see real work early. Each card opens the project's detail window.
  * Pure CSS (no scroll effect): readable without JavaScript. On phones, the cards scroll sideways
  * (the next card peeks in, so no scrollbar is needed).
  */
@@ -43,22 +44,29 @@ export function FeaturedWork() {
 
       <ul className="shell mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-8 [scrollbar-width:none] md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-6">
         {featured.map((project, index) => (
-          <li key={`${project.title}-${index}`} data-reveal className="w-[82%] shrink-0 snap-center md:w-auto">
-            <a href={`#project-${index + 1}`} className="group block rounded-2xl">
-              <ProjectPreview
-                project={project}
-                compact
-                sizes="(min-width: 768px) 30vw, 82vw"
-                className={`transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-0 group-focus-visible:-translate-y-2 group-focus-visible:rotate-0 ${tilts[index] ?? ""}`}
-              />
-              <span className={`mt-5 flex items-baseline gap-3 ${index === 1 ? "md:mt-11" : ""}`}>
-                <span className="text-sm font-semibold text-accent-strong">{String(index + 1).padStart(2, "0")}</span>
-                <span className="font-display text-xl font-bold transition-colors group-hover:text-accent-strong">
-                  {project.title}
-                </span>
+          <li key={project.slug} data-reveal className="group relative w-[82%] shrink-0 snap-center md:w-auto">
+            <ProjectPreview
+              project={project}
+              compact
+              sizes="(min-width: 768px) 30vw, 82vw"
+              className={`transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-0 group-has-focus-visible:-translate-y-2 group-has-focus-visible:rotate-0 ${tilts[index] ?? ""}`}
+            />
+            <p className={`mt-5 flex items-baseline gap-3 ${index === 1 ? "md:mt-11" : ""}`}>
+              <span className="text-sm font-semibold text-accent-strong">{String(index + 1).padStart(2, "0")}</span>
+              <span className="font-display text-xl font-bold transition-colors group-hover:text-accent-strong">
+                {project.title}
               </span>
-              {project.tags[0] && <span className="mt-1 block pl-8 text-sm text-muted">{project.tags[0]}</span>}
-            </a>
+            </p>
+            <p className="mt-1 pl-8 text-sm text-muted">{project.category}</p>
+            {/* Covers the whole card: a click anywhere opens the project's details */}
+            <OpenDetailsButton
+              slug={project.slug}
+              className="absolute inset-0 rounded-2xl focus-visible:outline-offset-4"
+            >
+              <span className="sr-only">
+                {en.portfolio.viewDetails}: {project.title}
+              </span>
+            </OpenDetailsButton>
           </li>
         ))}
       </ul>

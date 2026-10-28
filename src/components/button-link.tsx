@@ -19,6 +19,11 @@ const variants = {
   dark: "bg-on-accent text-[#f5f3f0] hover:bg-[color-mix(in_oklab,var(--on-accent),white_14%)]",
 };
 
+/** The same look for a real <button> (e.g. one that opens a window). */
+export function buttonClass(variant: keyof typeof variants = "primary"): string {
+  return `${base} ${variants[variant]}`;
+}
+
 type Props = {
   href: string;
   variant?: keyof typeof variants;
@@ -27,7 +32,7 @@ type Props = {
 };
 
 export function ButtonLink({ href, variant = "primary", className = "", children }: Props) {
-  const classes = `${base} ${variants[variant]} ${className}`;
+  const classes = `${buttonClass(variant)} ${className}`;
 
   if (href.startsWith("http")) {
     return (

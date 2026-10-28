@@ -7,6 +7,8 @@ import { en } from "@/content/en";
  * A project's screenshot inside a simple browser window (three dots + the site's address),
  * like a real visit. The screenshot is shown whole (16:10, from the top), never cropped on the sides.
  * Used by the big "Selected work" rows and the small "Recent work" cards near the top.
+ * Decorative (alt=""): the project title is always written next to it.
+ * Put it in a container with `min-w-0` when it sits in a grid: a long address must not widen the page.
  */
 export function ProjectPreview({
   project,
@@ -21,6 +23,8 @@ export function ProjectPreview({
   compact?: boolean;
   className?: string;
 }) {
+  const cover = project.images[0];
+
   return (
     <div
       className={`overflow-hidden border border-line bg-surface shadow-2xl shadow-black/20 ${compact ? "rounded-2xl" : "rounded-[1.5rem]"} ${className}`}
@@ -42,8 +46,8 @@ export function ProjectPreview({
         <span className={`shrink-0 ${compact ? "w-9" : "w-12"}`} />
       </div>
       <div className="relative aspect-[16/10]">
-        {project.image ? (
-          <Image src={project.image} alt="" fill sizes={sizes} className="object-cover object-top" />
+        {cover ? (
+          <Image src={cover.src} alt="" fill sizes={sizes} className="object-cover object-top" />
         ) : (
           <div
             className="absolute inset-0 grid place-items-center text-muted"

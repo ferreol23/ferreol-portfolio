@@ -173,15 +173,22 @@ export const en = {
   },
   portfolio: {
     heading: "Selected work",
-    intro: "A few projects I've built.",
-    viewProject: "View project",
-    // Labels of the mini case study under each project.
-    problem: "The problem",
-    built: "What I built",
-    result: "The result",
+    intro: "Sites I've built for clients. Each one can be the starting point of yours.",
+    // Opens the detail window (big screenshots + full description).
+    viewDetails: "View details",
+    liveSite: "Visit the live site",
     // Opens the contact form with "I'd like something similar to <project>" already written.
     similar: "I want something similar",
     screenshotPlaceholder: "[PROJECT SCREENSHOT]",
+    // Detail window
+    close: "Close",
+    features: "What's inside",
+    builtWith: "Built with",
+    screenshots: "Screenshots",
+    // e.g. "Screenshot 2 of 6"
+    screenshotOf: "Screenshot {current} of {total}",
+    previous: "Previous screenshot",
+    next: "Next screenshot",
   },
   cta: {
     heading: "Let's build your project.",
