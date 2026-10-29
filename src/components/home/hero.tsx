@@ -1,19 +1,18 @@
 import { ArrowUpRight, Asterisk } from "lucide-react";
-import Image from "next/image";
 import type { CSSProperties } from "react";
 import { ButtonLink } from "@/components/button-link";
+import { HeroVideo } from "@/components/home/hero-video";
 import { Magnetic } from "@/components/magnetic";
 import { SocialLinks } from "@/components/social-links";
 import { FIVERR_URL } from "@/config/links";
 import { siteConfig } from "@/config/site";
 import { en, fill } from "@/content/en";
-import { withBasePath } from "@/lib/base-path";
 
 /** Stagger helper for the page-load animation (pure CSS, so it works before JavaScript loads). */
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as CSSProperties;
 
 /**
- * First screen: one focal point. Big headline on the left, portrait on the right.
+ * First screen: one focal point. Big headline on the left, presentation video on the right.
  */
 export function Hero() {
   const name = siteConfig.name;
@@ -24,7 +23,8 @@ export function Hero() {
   const words = headline.split(" ");
 
   return (
-    <section aria-labelledby="hero-heading" className="relative">
+    // overflow-x-clip: the video's glow spills past the screen edge without causing a sideways scroll.
+    <section aria-labelledby="hero-heading" className="relative overflow-x-clip">
       <div className="shell grid items-center gap-12 pb-20 pt-10 sm:pt-14 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-12 lg:gap-10 lg:py-12">
         {/* Text side */}
         <div className="lg:col-span-7">
@@ -75,60 +75,18 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Portrait: black-and-white photo lit by a warm orange rim light (or your initial, until you add a photo) */}
-        <div className="rise relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none" style={delay(240)}>
-          <figure className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line bg-surface">
-            {siteConfig.photo ? (
-              <Image
-                src={withBasePath(siteConfig.photo)}
-                alt={fill(en.hero.photoAlt, { name })}
-                fill
-                priority
-                sizes="(min-width: 1024px) 34rem, 90vw"
-                className="object-cover object-top grayscale contrast-125 brightness-[0.8]"
-              />
-            ) : (
-              // No photo yet: a big initial lit by the same orange light (decoration).
-              <div aria-hidden="true" className="grid h-full place-items-center pb-16">
-                <span className="display select-none text-[clamp(12rem,32vw,24rem)] leading-none text-surface-2">
-                  {name.charAt(0)}
-                  <span className="text-accent">.</span>
-                </span>
-              </div>
-            )}
-
-            {/* Orange light from the right, drifting slowly */}
-            <div
-              aria-hidden="true"
-              className="glow-drift pointer-events-none absolute -inset-[20%] mix-blend-soft-light"
-              style={{
-                background: "radial-gradient(55% 45% at 85% 30%, var(--accent), transparent 70%)",
-              }}
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 mix-blend-color"
-              style={{
-                background:
-                  "linear-gradient(250deg, color-mix(in oklab, var(--accent) 55%, transparent), transparent 55%)",
-              }}
-            />
-            {/* Fades the bottom of the photo into the page */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-bg/90 to-transparent"
-            />
-
-            <figcaption className="absolute bottom-6 left-6 right-6">
-              <span className="font-display text-2xl font-bold">{name}</span>
-              <span className="text-accent-strong" aria-hidden="true">
-                .
-              </span>
-              <span className="block text-sm text-muted">{siteConfig.location}</span>
-            </figcaption>
+        {/* The 30-second presentation video, with a soft orange light behind it */}
+        <div className="rise relative mx-auto w-full max-w-2xl lg:col-span-5 lg:max-w-none" style={delay(240)}>
+          <div
+            aria-hidden="true"
+            className="glow-drift pointer-events-none absolute -inset-[15%] -z-10 opacity-60 blur-3xl"
+            style={{ background: "radial-gradient(50% 50% at 60% 55%, var(--glow), transparent 70%)" }}
+          />
+          <figure className="relative aspect-video overflow-hidden rounded-[1.5rem] border border-line bg-[#0b0b0c] shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)]">
+            <HeroVideo />
           </figure>
 
-          {/* Rotating round badge on the photo's corner (decoration only).
+          {/* Rotating round badge on the video's corner (decoration only).
               overflow-hidden: the spinning square SVG's corners would otherwise stick out
               past the circle (and past the screen edge, causing a sideways scroll). */}
           <div

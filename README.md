@@ -55,7 +55,8 @@ Le site est publié sur **GitHub Pages** : https://ferreol23.github.io/ferreol-p
 
 | Je veux changer… | Fichier |
 |---|---|
-| Nom, slogan, email, adresse du site, photo, langues | `src/config/site.ts` |
+| Nom, slogan, email, adresse du site, langues | `src/config/site.ts` |
+| Vidéo du hero (fichier, image d'aperçu, sous-titres) | `public/video/` (lecteur : `src/components/home/hero-video.tsx`) |
 | Liens Fiverr, GitHub, LinkedIn, Instagram | `src/config/links.ts` |
 | Numéro WhatsApp | `src/config/site.ts` (`whatsapp`) |
 | Mes projets (textes, captures, liens) | `src/config/projects.ts` |
@@ -91,7 +92,7 @@ deux envois.
 - [x] Lien **Fiverr** → `FIVERR_URL` dans `src/config/links.ts`
 - [x] Numéro **WhatsApp** → `whatsapp` dans `src/config/site.ts` (le numéro n'est pas affiché : il sert seulement aux liens « Send me a message »)
 - [x] **Projets** + **captures d'écran** → `src/config/projects.ts` (captures dans `public/projects/`, idéalement 1600×1000)
-- [ ] **Vraie photo** → `photo` dans `src/config/site.ts` (en attendant, le hero affiche l'initiale « F. »)
+- [x] **Vidéo de présentation** dans le hero → `public/video/ferreol-promo.mp4` (source : dossier `motion-video/`, hors git)
 - [ ] **Délai habituel de livraison** (optionnel) → question « How long does it take? » dans `src/content/en.ts`
 - [x] **Adresse du site** → `url` dans `src/config/site.ts` (GitHub Pages ; à changer si tu prends un nom de domaine)
 - [ ] Logo « F » définitif (optionnel) → remplace `src/app/icon.svg` et `src/app/apple-icon.png`

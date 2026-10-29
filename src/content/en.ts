@@ -36,8 +36,16 @@ export const en = {
       "For two years I've been building websites, web apps and mobile apps for businesses and entrepreneurs worldwide. Clean, fast, responsive code, clear communication, and support after delivery.",
     hireOnFiverr: "Hire me on Fiverr",
     contactMe: "Contact me",
-    photoAlt: "Portrait of {name}",
-    // Text that circles around the rotating badge next to the photo.
+    // The presentation video's player buttons (read by screen readers).
+    video: {
+      label: "30-second presentation video: who I am, three sites I built, and what you get",
+      play: "Play the video",
+      pause: "Pause the video",
+      sound: "Sound",
+      captions: "Captions",
+      fullscreen: "Watch full screen, with sound",
+    },
+    // Text that circles around the rotating badge next to the video.
     badge: "Web & app developer • Freelance • Let's build • ",
   },
   marquee: [
