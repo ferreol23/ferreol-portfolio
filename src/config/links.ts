@@ -5,7 +5,7 @@ import { en, fill } from "@/content/en";
  * Your external profile links.
  * Replace each [PLACEHOLDER] part with your real username / number.
  */
-export const FIVERR_URL = "https://www.fiverr.com/s/L33ZXWa";
+export const FIVERR_URL = "https://www.fiverr.com/ferreol_?public_mode=true";
 export const GITHUB_URL = "https://github.com/ferreol23";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/ferreol-code-a190083b3/";
 export const INSTAGRAM_URL = "https://www.instagram.com/ferreol_code/";
