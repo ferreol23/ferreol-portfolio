@@ -78,6 +78,9 @@ export function SiteFooter() {
             © <CurrentYear /> {siteConfig.name}. {en.footer.rights}
           </p>
           <div className="flex flex-wrap items-center gap-x-6">
+            <NavLink href="/privacy" className="inline-flex min-h-11 items-center transition-colors hover:text-text">
+              {en.footer.privacy}
+            </NavLink>
             <ConsentSettingsButton className="inline-flex min-h-11 items-center transition-colors hover:text-text" />
             <a href="#content" className="inline-flex min-h-11 items-center gap-2 transition-colors hover:text-text">
               {en.footer.backToTop}

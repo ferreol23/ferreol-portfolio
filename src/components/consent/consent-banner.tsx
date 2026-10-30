@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { en } from "@/content/en";
 import { getConsent, setConsent, subscribeConsent } from "@/lib/consent";
@@ -41,7 +42,12 @@ export function ConsentBanner() {
       <h2 id="consent-title" className="font-display text-xl font-bold">
         {t.title}
       </h2>
-      <p className="mt-2 text-sm text-muted">{t.body}</p>
+      <p className="mt-2 text-sm text-muted">
+        {t.body}{" "}
+        <Link href="/privacy" className="font-semibold text-text underline underline-offset-4 hover:text-accent-strong">
+          {t.learnMore}
+        </Link>
+      </p>
       <div className="mt-5 flex gap-3">
         <button
           type="button"

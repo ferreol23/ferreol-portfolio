@@ -31,3 +31,4 @@ Sur GitHub : page du dépôt → **Tags** (ou **Releases**) → choisir la versi
 | [v1.1.0](v1.1.0.md) | 2026-10-29 | Vidéo de présentation de 30 s dans le hero |
 | [v1.1.1](v1.1.1.md) | 2026-10-29 | Les boutons « Hire me » mènent à ton profil Fiverr |
 | [v1.2.0](v1.2.0.md) | 2026-10-30 | Nouveau logo « F. » sur le site, `</F>` en bas de page |
+| [v1.3.0](v1.3.0.md) | 2026-10-30 | Page de confidentialité (RGPD) et vérification complète du site |

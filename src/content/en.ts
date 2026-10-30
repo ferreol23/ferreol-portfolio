@@ -300,6 +300,67 @@ export const en = {
     decline: "No thanks",
     // Footer link that brings the banner back.
     settings: "Privacy settings",
+    // Link in the banner to the privacy page.
+    learnMore: "Privacy policy",
+  },
+  privacyPage: {
+    metaTitle: "Privacy policy",
+    metaDescription: "What data {name}'s website collects, why, where it is stored and how to have it deleted.",
+    heading: "Privacy policy",
+    intro: "Short and plain: what this site collects, why, and what you can do about it.",
+    // Change this date every time you edit the policy.
+    updated: "Last updated: October 30, 2026",
+    contactPrefix: "Questions, or want your data deleted? Write to",
+    sections: [
+      {
+        title: "Who is responsible",
+        paragraphs: [
+          "This website belongs to {name}, freelance web and app developer. I am the only person who handles the data described here.",
+        ],
+      },
+      {
+        title: "What I collect and why",
+        items: [
+          "Contact form: your name, your email, your message, and the project type and timeline if you pick them. I use them only to answer you and talk about your project.",
+          "Review form: your name, your rating and your review. I read every review by hand. If I approve it, your name, rating and review are shown on the Reviews page.",
+          "Visit counting, only if you click “Accept” in the privacy box: the address of each page you open and the time. Nothing that identifies you.",
+        ],
+        paragraphs: [
+          "No cookies, no ads, no tracking tools. I never sell or share your data.",
+        ],
+      },
+      {
+        title: "Where it is stored",
+        paragraphs: [
+          "Messages, reviews and visit counts are stored in a Supabase database on servers in the European Union (Ireland).",
+          "The site itself is hosted by GitHub Pages. Like any web host, GitHub may record technical data such as your IP address to keep its service secure.",
+        ],
+      },
+      {
+        title: "Saved in your browser",
+        paragraphs: [
+          "A few settings are kept in your browser's local storage (not cookies), and never leave your device: your light or dark theme, your answer to the privacy box, and a short waiting time after you send a form (it stops spam). You can clear them at any time in your browser settings.",
+        ],
+      },
+      {
+        title: "How long I keep it",
+        paragraphs: [
+          "Messages are kept as long as needed to answer you and follow up on your project. Reviews stay online as long as the site exists. Both are deleted as soon as you ask.",
+        ],
+      },
+      {
+        title: "Your rights",
+        paragraphs: [
+          "You can ask to see, correct or delete your data at any time, by email. You can change your answer about visit counting whenever you want with “Privacy settings” at the bottom of every page. If you think your data is misused, you can also complain to the data protection authority of your country.",
+        ],
+      },
+      {
+        title: "Other websites",
+        paragraphs: [
+          "Links to Fiverr, WhatsApp, LinkedIn, GitHub and Instagram open their own websites, which have their own privacy policies.",
+        ],
+      },
+    ],
   },
   notFound: {
     metaTitle: "Page not found",
@@ -317,6 +378,7 @@ export const en = {
     rights: "All rights reserved.",
     navLabel: "Footer",
     backToTop: "Back to top",
+    privacy: "Privacy policy",
   },
 };
 
