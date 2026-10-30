@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Temporary "F" mark in the site's orange. Replace this file with your real logo. -->
-  <rect width="32" height="32" rx="7" fill="#ff6b1a"/>
-  <path fill="#0b0b0c" d="M10 7h13v5h-8v3h7v4.5h-7V25h-5z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- "F." logo on the site's orange. Master files: logo-profil/kit (not in the repo). -->
+  <rect width="256" height="256" rx="56" fill="#ff6b1a"/>
+  <g transform="translate(29.38 24.38) scale(0.78)">
+    <path fill="#0b0b0c" d="M40 32H216V84H96V100H176V146H96V224H40Z"/>
+    <circle fill="#efe9e1" cx="189" cy="197" r="29"/>
+  </g>
 </svg>

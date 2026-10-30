@@ -6,6 +6,7 @@ import { BrandIcon } from "./brand-icon";
 import { ConsentSettingsButton } from "./consent/consent-banner";
 import { CurrentYear } from "./current-year";
 import { FooterWordmark } from "./footer-wordmark";
+import { SlashMark } from "./logo-mark";
 import { NavLink } from "./nav-link";
 import { SocialLinks } from "./social-links";
 
@@ -24,6 +25,7 @@ export function SiteFooter() {
     <footer className="overflow-hidden border-t border-line">
       <div className="shell grid gap-12 py-16 md:grid-cols-12">
         <div className="md:col-span-5">
+          <SlashMark className="mb-6 h-12 w-auto" />
           <p className="max-w-xs text-lg text-muted">{siteConfig.tagline}</p>
           <SocialLinks className="mt-6" />
         </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import { LogoMark } from "./logo-mark";
 import { SiteNav } from "./site-nav";
 
 /** Top bar shown on every page. Stays visible while scrolling. */
@@ -7,10 +8,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-bg/85 backdrop-blur-md">
       <div className="shell relative flex h-18 items-center justify-between gap-4">
-        <Link href="/" className="font-display text-xl font-bold tracking-tight">
-          {siteConfig.name}
-          <span className="text-accent-strong" aria-hidden="true">
-            .
+        <Link href="/" className="inline-flex items-center gap-2.5 font-display text-xl font-bold tracking-tight">
+          <LogoMark className="size-7" />
+          <span>
+            {siteConfig.name}
+            <span className="text-accent-strong" aria-hidden="true">
+              .
+            </span>
           </span>
         </Link>
         <SiteNav />
