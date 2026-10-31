@@ -2,7 +2,7 @@
 
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FIVERR_URL } from "@/config/links";
 import { en } from "@/content/en";
 import { Magnetic } from "./magnetic";
@@ -22,6 +22,20 @@ const links = [
 export function SiteNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  // Escape closes the open menu wherever the focus is (often still on the menu button),
+  // and puts the focus back on the button.
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   const linkClass = (href: string) => {
     const active = href === pathname;
@@ -59,6 +73,7 @@ export function SiteNav() {
         </Magnetic>
         <ThemeToggle />
         <button
+          ref={toggleRef}
           type="button"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
@@ -75,9 +90,6 @@ export function SiteNav() {
           id="mobile-menu"
           aria-label={en.nav.mobileLabel}
           className="absolute inset-x-0 top-full border-b border-line bg-bg px-4 pb-6 pt-2 lg:hidden"
-          onKeyDown={(event) => {
-            if (event.key === "Escape") setOpen(false);
-          }}
         >
           <ul className="flex flex-col">
             {links.map((link) => (

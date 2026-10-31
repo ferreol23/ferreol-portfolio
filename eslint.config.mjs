@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The video projects: not part of the site, and not in Git.
+    "videos/**",
   ]),
 ]);
 

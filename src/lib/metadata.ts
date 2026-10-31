@@ -8,7 +8,9 @@ import { siteConfig } from "@/config/site";
   Next.js does NOT merge the openGraph part between the layout and a page:
   a page that sets its own title would otherwise share the home page's
   preview title. So every page builds its metadata with pageMetadata().
-  The preview image itself is src/app/opengraph-image.png (1200 × 630).
+  The preview image itself is public/opengraph-image.png (1200 × 630).
+  It is NOT in src/app: Next.js would then add the /ferreol-portfolio folder a
+  second time to its address on the home page, and the link would be broken.
 */
 
 /** The shared preview image (one image for the whole site). */
@@ -31,9 +33,6 @@ const homeTitle = `${siteConfig.name} | ${siteConfig.tagline}`;
 
 export function pageMetadata({ title, description, path }: PageInfo): Metadata {
   const fullTitle = title ? `${title} | ${siteConfig.name}` : homeTitle;
-  // The home page gets the image from opengraph-image.png directly; other pages
-  // lose it once they set their own openGraph, so they point to it here.
-  const images = title ? { images: [OG_IMAGE] } : {};
 
   return {
     ...(title ? { title } : {}),
@@ -46,13 +45,13 @@ export function pageMetadata({ title, description, path }: PageInfo): Metadata {
       url: path,
       title: fullTitle,
       description,
-      ...images,
+      images: [OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      ...images,
+      images: [OG_IMAGE],
     },
   };
 }

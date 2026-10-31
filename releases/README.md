@@ -36,3 +36,4 @@ Sur GitHub : page du dépôt → **Tags** (ou **Releases**) → choisir la versi
 | [v1.4.1](v1.4.1.md) | 2026-10-31 | 8e vidéo « Your website has 3 seconds » dans la section vidéos |
 | [v1.5.0](v1.5.0.md) | 2026-10-31 | 9e vidéo « Same bakery. Two websites. » + badge « New » qui disparaît seul après 48 h |
 | [v1.6.0](v1.6.0.md) | 2026-10-31 | La vidéo Fiverr d'1 minute (format téléphone) dans le hero |
+| [v1.6.1](v1.6.1.md) | 2026-10-31 | Chasse aux bugs : image d'aperçu de l'accueil, une seule vidéo avec le son, Échap ferme le menu mobile |

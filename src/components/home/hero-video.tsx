@@ -5,6 +5,7 @@
   - Plays muted and on a loop as soon as it's on screen (browsers only allow muted autoplay),
     and pauses while it's scrolled out of view.
   - "Sound on" restarts it from the beginning, with the voice and the music.
+  - One sound at a time: "Sound on" pauses the other videos, and starting another video mutes this one.
   - Visitors who asked for reduced motion get the still poster and press play themselves.
   - English captions (public/video/fiverr-promo.en.vtt) can be switched on.
   - The full-screen button opens it big, with the sound on.
@@ -49,6 +50,18 @@ export function HeroVideo() {
     return () => observer.disconnect();
   }, []);
 
+  // One sound at a time: when another video on the page starts, this one goes back to silent.
+  // "play" doesn't bubble, so the listener sits on the document in the capture phase.
+  useEffect(() => {
+    const el = video.current;
+    if (!el) return;
+    const onPlay = (event: Event) => {
+      if (event.target !== el && !el.muted) el.muted = true;
+    };
+    document.addEventListener("play", onPlay, true);
+    return () => document.removeEventListener("play", onPlay, true);
+  }, []);
+
   const togglePlay = () => {
     const el = video.current;
     if (!el) return;
@@ -69,11 +82,14 @@ export function HeroVideo() {
       el.currentTime = 0;
       el.muted = false;
       pausedByVisitor.current = false;
+      // Stop any other video that is playing, so two sounds never overlap.
+      document.querySelectorAll("video").forEach((other) => {
+        if (other !== el && !other.paused) other.pause();
+      });
       el.play().catch(() => {});
     } else {
       el.muted = true;
     }
-    setMuted(el.muted);
   };
 
   // Full screen, with the sound on (iPhone Safari only allows full screen on the video itself).
@@ -107,6 +123,7 @@ export function HeroVideo() {
         aria-label={en.hero.video.label}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
+        onVolumeChange={(event) => setMuted(event.currentTarget.muted)}
       >
         <source src={SRC} type="video/mp4" />
         <track ref={trackEl} src={CAPTIONS} kind="captions" srcLang="en" label="English" />
