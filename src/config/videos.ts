@@ -13,8 +13,9 @@ export type Reel = {
 };
 
 export const reels: Reel[] = [
+  { slug: "you-have-3-seconds", title: "Your website has 3 seconds", length: "0:16", isNew: true },
   { slug: "online-shop-on-a-phone", title: "I built this online shop. Watch it on a phone", length: "0:17", isNew: true },
-  { slug: "4-steps", title: "Hiring a web developer? Here's exactly what happens", length: "0:24", isNew: true },
+  { slug: "4-steps", title: "Hiring a web developer? Here's exactly what happens", length: "0:24" },
   { slug: "3-website-myths", title: "3 website myths costing you customers", length: "0:23" },
   { slug: "does-ai-know-your-business", title: "Does AI know your business? A 10-second test", length: "0:22" },
   { slug: "3-signs", title: "3 signs your website is costing you customers", length: "0:20" },
