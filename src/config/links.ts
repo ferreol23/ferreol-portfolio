@@ -6,9 +6,11 @@ import { en, fill } from "@/content/en";
  * Replace each [PLACEHOLDER] part with your real username / number.
  */
 export const FIVERR_URL = "https://www.fiverr.com/ferreol_?public_mode=true";
-export const GITHUB_URL = "https://github.com/ferreol23";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/ferreol-code-a190083b3/";
 export const INSTAGRAM_URL = "https://www.instagram.com/ferreol_code/";
+export const TIKTOK_URL = "https://www.tiktok.com/@ferreol_dev";
+export const YOUTUBE_URL = "https://www.youtube.com/@ferreol_code";
+export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61551034150341";
 // WhatsApp: built from the number in src/config/site.ts (wa.me needs digits only).
 export const WHATSAPP_URL = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`;
 
@@ -17,7 +19,7 @@ export function whatsappLink(text: string): string {
   return `${WHATSAPP_URL}?text=${encodeURIComponent(text)}`;
 }
 
-export type SocialName = "fiverr" | "github" | "linkedin" | "instagram" | "whatsapp";
+export type SocialName = "fiverr" | "linkedin" | "instagram" | "tiktok" | "youtube" | "facebook" | "whatsapp";
 
 /**
  * The social icons row (hero, footer, contact page). Remove a line to hide that icon.
@@ -25,9 +27,11 @@ export type SocialName = "fiverr" | "github" | "linkedin" | "instagram" | "whats
  */
 const allSocialLinks: { name: SocialName; label: string; href: string }[] = [
   { name: "fiverr", label: "Fiverr", href: FIVERR_URL },
-  { name: "github", label: "GitHub", href: GITHUB_URL },
   { name: "linkedin", label: "LinkedIn", href: LINKEDIN_URL },
   { name: "instagram", label: "Instagram", href: INSTAGRAM_URL },
+  { name: "tiktok", label: "TikTok", href: TIKTOK_URL },
+  { name: "youtube", label: "YouTube", href: YOUTUBE_URL },
+  { name: "facebook", label: "Facebook", href: FACEBOOK_URL },
   { name: "whatsapp", label: "WhatsApp", href: whatsappLink(fill(en.whatsapp.hello, { name: siteConfig.name })) },
 ];
 

@@ -178,6 +178,17 @@ export const en = {
     heading: "See what I build",
     seeAll: "See all projects",
   },
+  videos: {
+    // Section with the short videos (list in src/config/videos.ts).
+    eyebrow: "Videos",
+    heading: "Watch before you hire",
+    intro: "Short, no-jargon videos about websites for small businesses: quick checks you can do yourself, and exactly how I work. Tap one to watch it with sound.",
+    newBadge: "New",
+    // Read by screen readers on each video.
+    label: "Video: {title}",
+    follow: "Follow for more on",
+    scrollHint: "Swipe for more",
+  },
   portfolio: {
     heading: "Selected work",
     intro: "Sites I've built for clients. Each one can be the starting point of yours.",
@@ -309,7 +320,7 @@ export const en = {
     heading: "Privacy policy",
     intro: "Short and plain: what this site collects, why, and what you can do about it.",
     // Change this date every time you edit the policy.
-    updated: "Last updated: October 30, 2026",
+    updated: "Last updated: October 31, 2026",
     contactPrefix: "Questions, or want your data deleted? Write to",
     sections: [
       {
@@ -357,7 +368,7 @@ export const en = {
       {
         title: "Other websites",
         paragraphs: [
-          "Links to Fiverr, WhatsApp, LinkedIn, GitHub and Instagram open their own websites, which have their own privacy policies.",
+          "Links to Fiverr, WhatsApp, LinkedIn, Instagram, TikTok, YouTube and Facebook open their own websites, which have their own privacy policies. The videos on this page are played from this site, without any tracking.",
         ],
       },
     ],

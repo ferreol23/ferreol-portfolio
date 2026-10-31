@@ -8,9 +8,10 @@ import { Marquee } from "@/components/home/marquee";
 import { Portfolio } from "@/components/home/portfolio";
 import { Process } from "@/components/home/process";
 import { Services } from "@/components/home/services";
+import { Videos } from "@/components/home/videos";
 import { RevealScope } from "@/components/reveal-scope";
 
-// Home page, told as a story: who → a glimpse of the work → what → about → how → proof → why → questions → action.
+// Home page, told as a story: who → a glimpse of the work → what → about → how → proof → videos → why → questions → action.
 // Reorder or remove lines to change the page.
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <About />
       <Process />
       <Portfolio />
+      <Videos />
       <Benefits />
       <Faq />
       <FiverrCta />

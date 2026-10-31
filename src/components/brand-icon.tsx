@@ -1,4 +1,4 @@
-import { siFiverr, siGithub, siInstagram, siWhatsapp } from "simple-icons";
+import { siFacebook, siFiverr, siInstagram, siTiktok, siWhatsapp, siYoutube } from "simple-icons";
 import type { SocialName } from "@/config/links";
 
 // Official brand shapes from the simple-icons library (free to use, CC0).
@@ -8,8 +8,10 @@ const LINKEDIN_PATH =
 
 const paths: Record<SocialName, string> = {
   fiverr: siFiverr.path,
-  github: siGithub.path,
   instagram: siInstagram.path,
+  tiktok: siTiktok.path,
+  youtube: siYoutube.path,
+  facebook: siFacebook.path,
   whatsapp: siWhatsapp.path,
   linkedin: LINKEDIN_PATH,
 };
