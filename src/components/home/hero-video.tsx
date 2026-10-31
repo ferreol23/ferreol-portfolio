@@ -1,14 +1,15 @@
 "use client";
 
 /*
-  HeroVideo — the 30-second presentation video on the right of the hero.
+  HeroVideo — the 60-second Fiverr video (vertical, 9:16) on the right of the hero.
   - Plays muted and on a loop as soon as it's on screen (browsers only allow muted autoplay),
     and pauses while it's scrolled out of view.
   - "Sound on" restarts it from the beginning, with the voice and the music.
   - Visitors who asked for reduced motion get the still poster and press play themselves.
-  - English captions (public/video/ferreol-promo.en.vtt) can be switched on.
+  - English captions (public/video/fiverr-promo.en.vtt) can be switched on.
   - The full-screen button opens it big, with the sound on.
-  Without JavaScript, the poster (the FERREOL. end card) is shown.
+  Without JavaScript, the poster (the "from $80" opening frame) is shown.
+  The older 30-second presentation lives on in the videos section (reel "presentation").
 */
 
 import { Captions, Maximize, Pause, Play, Volume2, VolumeX } from "lucide-react";
@@ -17,9 +18,9 @@ import { prefersReducedMotion } from "@/animations/setup";
 import { en } from "@/content/en";
 import { withBasePath } from "@/lib/base-path";
 
-const SRC = withBasePath("/video/ferreol-promo.mp4");
-const POSTER = withBasePath("/video/ferreol-promo-poster.webp");
-const CAPTIONS = withBasePath("/video/ferreol-promo.en.vtt");
+const SRC = withBasePath("/video/fiverr-promo.mp4");
+const POSTER = withBasePath("/video/fiverr-promo-poster.webp");
+const CAPTIONS = withBasePath("/video/fiverr-promo.en.vtt");
 
 const control =
   "grid size-11 place-items-center rounded-full border border-white/15 bg-black/55 text-[#f5f3f0] backdrop-blur-sm transition-colors duration-200 hover:border-accent hover:text-accent";

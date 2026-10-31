@@ -38,7 +38,7 @@ export const en = {
     contactMe: "Contact me",
     // The presentation video's player buttons (read by screen readers).
     video: {
-      label: "30-second presentation video: who I am, three sites I built, and what you get",
+      label: "60-second video: a real business website from $80, three sites I built, what you get and my three Fiverr packages",
       play: "Play the video",
       pause: "Pause the video",
       sound: "Sound",

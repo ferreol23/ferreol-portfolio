@@ -75,14 +75,14 @@ export function Hero() {
           </div>
         </div>
 
-        {/* The 30-second presentation video, with a soft orange light behind it */}
-        <div className="rise relative mx-auto w-full max-w-2xl lg:col-span-5 lg:max-w-none" style={delay(240)}>
+        {/* The 60-second Fiverr video (vertical), with a soft orange light behind it */}
+        <div className="rise relative mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:col-span-5 lg:max-w-[380px]" style={delay(240)}>
           <div
             aria-hidden="true"
             className="glow-drift pointer-events-none absolute -inset-[15%] -z-10 opacity-60 blur-3xl"
             style={{ background: "radial-gradient(50% 50% at 60% 55%, var(--glow), transparent 70%)" }}
           />
-          <figure className="relative aspect-video overflow-hidden rounded-[1.5rem] border border-line bg-[#0b0b0c] shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)]">
+          <figure className="relative aspect-[9/16] overflow-hidden rounded-[1.5rem] border border-line bg-[#0b0b0c] shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)]">
             <HeroVideo />
           </figure>
 
