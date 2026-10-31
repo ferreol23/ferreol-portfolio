@@ -1,5 +1,5 @@
 import { SocialLinks } from "@/components/social-links";
-import { reels } from "@/config/videos";
+import { newUntil, reels } from "@/config/videos";
 import { en, fill } from "@/content/en";
 import { withBasePath } from "@/lib/base-path";
 import { OneAtATime } from "./one-at-a-time";
@@ -42,8 +42,14 @@ export function Videos() {
                 >
                   <source src={withBasePath(`/video/reels/${reel.slug}.mp4`)} type="video/mp4" />
                 </video>
-                {reel.isNew && (
-                  <span className="pointer-events-none absolute left-3 top-3 rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#0b0b0c]">
+                {/* The site is prebuilt, so the badge ships hidden and OneAtATime shows it
+                    only while it is still within 48 hours of addedAt. */}
+                {newUntil(reel) !== null && (
+                  <span
+                    hidden
+                    data-new-until={newUntil(reel)}
+                    className="pointer-events-none absolute left-3 top-3 rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#0b0b0c]"
+                  >
                     {en.videos.newBadge}
                   </span>
                 )}

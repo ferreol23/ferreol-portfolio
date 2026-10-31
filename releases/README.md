@@ -34,3 +34,4 @@ Sur GitHub : page du dépôt → **Tags** (ou **Releases**) → choisir la versi
 | [v1.3.0](v1.3.0.md) | 2026-10-30 | Page de confidentialité (RGPD) et vérification complète du site |
 | [v1.4.0](v1.4.0.md) | 2026-10-31 | Section « Watch before you hire » avec les 7 vidéos ; TikTok, YouTube, Facebook ajoutés, GitHub retiré |
 | [v1.4.1](v1.4.1.md) | 2026-10-31 | 8e vidéo « Your website has 3 seconds » dans la section vidéos |
+| [v1.5.0](v1.5.0.md) | 2026-10-31 | 9e vidéo « Same bakery. Two websites. » + badge « New » qui disparaît seul après 48 h |
